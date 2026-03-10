@@ -898,7 +898,7 @@
         // === ЗАГРУЗКА КОНФИГУРАЦИИ ===
         async function loadConfig() {
             try {
-                const response = await fetch('config/pricing.json');
+                import config from './config/pricing.js';
                 if (!response.ok) {
                     throw new Error('HTTP error! status: ' + response.status);
                 }
