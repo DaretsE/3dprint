@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор стоимости 3D-печати</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 0; }
+        header h1 { color: #2c3e50; font-weight: 600; font-size: 2rem; }
+        section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        section h3 { color: #34495e; margin-bottom: 15px; font-size: 1.1rem; }
+        
+        /* Загрузка файла */
+        .upload-area {
+            border: 2px dashed #bdc3c7;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: #3498db;
+            background: #ebf5fb;
+        }
+        .upload-icon { font-size: 3rem; margin-bottom: 10px; }
+        .supported-formats { color: #95a5a6; font-size: 0.9rem; margin-top: 10px; }
+        
+        /* 3D Просмотрщик */
+        .viewer-container {
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #canvas-container { width: 100%; height: 100%; }
+        
+        /* Информация о модели */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .info-card { background: #f8f9fa; padding: 15px; border-radius: 8px; }
+        .info-data { display: flex; flex-direction: column; gap: 5px; color: #555; }
+        .info-data b { color: #2c3e50; }
+        .compatibility-status { display: flex; flex-direction: column; gap: 10px; }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #fff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .status-item.compatible { background: #d4edda; color: #155724; }
+        .status-item.incompatible { background: #f8d7da; color: #721c24; }
+        .status-icon { font-size: 1.2rem; }
+        
+        /* Радио кнопки */
+        .radio-group { display: flex; gap: 20px; flex-wrap: wrap; }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .radio-label:hover { background: #e9ecef; }
+        .radio-label input[type="radio"] { display: none; }
+        .radio-label input[type="radio"]:checked + .radio-custom {
+            background: #3498db;
+            border-color: #3498db;
+        }
+        .radio-label:has(input:checked) {
+            border-color: #3498db;
+            background: #ebf5fb;
+        }
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #bdc3c7;
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        /* Формы */
+        .form-select, .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: #fff;
+        }
+        .form-select:focus, .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .params-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { color: #555; font-weight: 500; }
+        
+        /* Итоговая стоимость */
+        .total-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .total-card h3 { color: white; margin-bottom: 15px; }
+        .total-price { font-size: 2.5rem; font-weight: 700; }
+        
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            .info-grid, .params-grid { grid-template-columns: 1fr; }
+            .radio-group { flex-direction: column; }
+            .total-price { font-size: 2rem; }
+            header h1 { font-size: 1.5rem; }
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section { animation: fadeIn 0.4s ease-out; }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖨️ Калькулятор 3D-печати</h1>
+        </header>
+
+        <!-- Загрузка файла -->
+        <section class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📁</div>
+                <p>Перетащите файл сюда или нажмите для выбора</p>
+                <p class="supported-formats">Поддерживаемые форматы: STL, OBJ, 3MF</p>
+                <input type="file" id="fileInput" accept=".stl,.obj,.3mf" hidden>
+            </div>
+        </section>
+
+        <!-- 3D Просмотрщик -->
+        <section class="viewer-section" id="viewerSection" style="display: none;">
+            <div class="viewer-container">
+                <div id="canvas-container"></div>
+            </div>
+        </section>
+
+        <!-- Параметры модели -->
+        <section class="model-info-section" id="modelInfoSection" style="display: none;">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📏 Размеры модели</h3>
+                    <div class="info-data">
+                        <span>X: <b id="sizeX">0</b> мм</span>
+                        <span>Y: <b id="sizeY">0</b> мм</span>
+                        <span>Z: <b id="sizeZ">0</b> мм</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>✅ Совместимость</h3>
+                    <div class="compatibility-status">
+                        <div class="status-item" id="fdmStatus">
+                            <span class="status-icon">⭕</span>
+                            <span>FDM (250×250×250 мм)</span>
+                        </div>
+                        <div class="status-item" id="resinStatus">
+                            <span class="status-icon">⭕</span>
+                            <span>Фотополимер (215×121×218 мм)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Выбор типа печати -->
+        <section class="print-type-section" id="printTypeSection" style="display: none;">
+            <h3>🔧 Тип печати</h3>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="printType" value="fdm" checked>
+                    <span class="radio-custom"></span>
+                    FDM печать
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="printType" value="resin">
+                    <span class="radio-custom"></span>
+                    Фотополимерная печать
+                </label>
+            </div>
+        </section>
+
+        <!-- Выбор материала -->
+        <section class="material-section" id="materialSection" style="display: none;">
+            <h3>🧪 Материал</h3>
+            <select id="materialSelect" class="form-select"></select>
+        </section>
+
+        <!-- Параметры печати -->
+        <section class="print-params-section" id="printParamsSection" style="display: none;">
+            <div class="params-grid">
+                <div class="form-group">
+                    <label for="printTime">⏱️ Время печати (минуты)</label>
+                    <input type="number" id="printTime" class="form-input" min="0" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала (граммы)</label>
+                    <input type="number" id="materialAmount" class="form-input" min="0" value="0">
+                </div>
+            </div>
+        </section>
+
+        <!-- Итоговая стоимость -->
+        <section class="total-section" id="totalSection" style="display: none;">
+            <div class="total-card">
+                <h3>💰 Итоговая стоимость</h3>
+                <div class="total-price" id="totalPrice">0.00 ₽</div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+        import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+        import { ThreeMFLoader } from 'three/addons/loaders/3MFLoader.js';
+
+        // === КОНФИГУРАЦИЯ ===
+        let config = null;
+
+        // === 3D СЦЕНА ===
+        let scene, camera, renderer, controls, model, boxHelper;
+
+        // === ИНИЦИАЛИЗАЦИЯ ===
+        async function init() {
+            await loadConfig();
+            init3DViewer();
+            setupEventListeners();
+        }
+
+        // === ЗАГРУЗКА КОНФИГУРАЦИИ ===
+        async function loadConfig() {
+            try {
+                const response = await fetch('config/pricing.json');
+                config = await response.json();
+                updateMaterialOptions();
+            } catch (error) {
+                console.error('Ошибка загрузки конфигурации:', error);
+                alert('Не удалось загрузить конфигурацию цен. Проверьте файл pricing.json');
+            }
+        }
+
+        // === 3D ПРОСМОТРЩИК ===
+        function init3DViewer() {
+            const container = document.getElementById('canvas-container');
+            
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf8f9fa);
+
+            camera = new THREE.PerspectiveCamera(
+                45,
+                container.clientWidth / container.clientHeight,
+                0.1,
+                10000
+            );
+            camera.position.set(200, 200, 200);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(100, 100, 100);
+            scene.add(directionalLight);
+
+            const gridHelper = new THREE.GridHelper(500, 50, 0xcccccc, 0xe0e0e0);
+            scene.add(gridHelper);
+
+            animate();
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        // === СОБЫТИЯ ===
+        function setupEventListeners() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    loadModel(e.dataTransfer.files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    loadModel(e.target.files[0]);
+                }
+            });
+
+            document.querySelectorAll('input[name="printType"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    updateMaterialOptions();
+                    calculateTotal();
+                });
+            });
+
+            document.getElementById('materialSelect').addEventListener('change', calculateTotal);
+            document.getElementById('printTime').addEventListener('input', calculateTotal);
+            document.getElementById('materialAmount').addEventListener('input', calculateTotal);
+        }
+
+        // === ЗАГРУЗКА МОДЕЛИ ===
+        function loadModel(file) {
+            const extension = file.name.split('.').pop().toLowerCase();
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const contents = e.target.result;
+                
+                if (model) scene.remove(model);
+                if (boxHelper) scene.remove(boxHelper);
+
+                let loader;
+                switch (extension) {
+                    case 'stl':
+                        loader = new STLLoader();
+                        const geometry = loader.parse(contents);
+                        model = new THREE.Mesh(
+                            geometry,
+                            new THREE.MeshPhongMaterial({ color: 0x3498db, specular: 0x111111, shininess: 200 })
+                        );
+                        break;
+                    case 'obj':
+                        loader = new OBJLoader();
+                        model = loader.parse(contents);
+                        break;
+                    case '3mf':
+                        loader = new ThreeMFLoader();
+                        model = loader.parse(contents);
+                        break;
+                    default:
+                        alert('Неподдерживаемый формат файла');
+                        return;
+                }
+
+                model.castShadow = true;
+                model.receiveShadow = true;
+                scene.add(model);
+
+                boxHelper = new THREE.BoxHelper(model, 0xff0000);
+                scene.add(boxHelper);
+
+                centerAndFitModel();
+                showModelInfo();
+            };
+
+            if (extension === 'stl') {
+                reader.readAsArrayBuffer(file);
+            } else {
+                reader.readAsText(file);
+            }
+        }
+
+        function centerAndFitModel() {
+            if (!model) return;
+
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            model.position.sub(center);
+
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fitHeightDistance = maxDim / (2 * Math.atan(Math.PI * camera.fov / 360));
+            const fitWidthDistance = fitHeightDistance / camera.aspect;
+            const distance = 1.2 * Math.max(fitHeightDistance, fitWidthDistance);
+
+            camera.position.set(distance, distance, distance);
+            camera.lookAt(0, 0, 0);
+            controls.update();
+        }
+
+        function showModelInfo() {
+            document.getElementById('viewerSection').style.display = 'block';
+            document.getElementById('modelInfoSection').style.display = 'block';
+            document.getElementById('printTypeSection').style.display = 'block';
+            document.getElementById('materialSection').style.display = 'block';
+            document.getElementById('printParamsSection').style.display = 'block';
+            document.getElementById('totalSection').style.display = 'block';
+
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3());
+
+            document.getElementById('sizeX').textContent = parseFloat(size.x.toFixed(2));
+            document.getElementById('sizeY').textContent = parseFloat(size.y.toFixed(2));
+            document.getElementById('sizeZ').textContent = parseFloat(size.z.toFixed(2));
+
+            checkCompatibility(size.x, size.y, size.z);
+            calculateTotal();
+        }
+
+        function checkCompatibility(x, y, z) {
+            const fdmLimits = { x: 250, y: 250, z: 250 };
+            const resinLimits = { x: 215, y: 121, z: 218 };
+
+            const fdmCompatible = x <= fdmLimits.x && y <= fdmLimits.y && z <= fdmLimits.z;
+            const resinCompatible = x <= resinLimits.x && y <= resinLimits.y && z <= resinLimits.z;
+
+            updateStatus('fdmStatus', fdmCompatible);
+            updateStatus('resinStatus', resinCompatible);
+        }
+
+        function updateStatus(elementId, compatible) {
+            const element = document.getElementById(elementId);
+            const icon = element.querySelector('.status-icon');
+            
+            if (compatible) {
+                element.classList.add('compatible');
+                element.classList.remove('incompatible');
+                icon.textContent = '✅';
+            } else {
+                element.classList.add('incompatible');
+                element.classList.remove('compatible');
+                icon.textContent = '❌';
+            }
+        }
+
+        function updateMaterialOptions() {
+            const printType = document.querySelector('input[name="printType"]:checked').value;
+            const select = document.getElementById('materialSelect');
+            const label = document.getElementById('materialAmountLabel');
+
+            select.innerHTML = '';
+
+            if (printType === 'fdm') {
+                label.textContent = '📦 Расход материала (граммы)';
+                const materials = config.costComponents.materials.plastic;
+                for (const [key, value] of Object.entries(materials)) {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = value.name;
+                    select.appendChild(option);
+                }
+            } else {
+                label.textContent = '📦 Расход материала (миллилитры)';
+                const materials = config.costComponents.materials.resin;
+                for (const [key, value] of Object.entries(materials)) {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = value.name;
+                    select.appendChild(option);
+                }
+            }
+
+            calculateTotal();
+        }
+
+        // === КАЛЬКУЛЯТОР ===
+        function calculateTotal() {
+            if (!config) return;
+
+            const printType = document.querySelector('input[name="printType"]:checked').value;
+            const material = document.getElementById('materialSelect').value;
+            const printTime = parseFloat(document.getElementById('printTime').value) || 0;
+            const materialAmount = parseFloat(document.getElementById('materialAmount').value) || 0;
+
+            const materialCost = calculateMaterialCost(printType, material, materialAmount);
+            const timeCost = calculateTimeCost(printType, printTime);
+            const energyCost = calculateEnergyCost(printType, printTime);
+            const amortizationCost = calculateAmortizationCost(printType, printTime);
+            const fixedCosts = calculateFixedCosts(printType, printTime);
+            const consumablesCost = calculateConsumablesCost(printType, printTime);
+
+            const subtotal = materialCost + timeCost + energyCost + amortizationCost + fixedCosts + consumablesCost;
+            const markup = getMarkup(printType);
+            const total = subtotal * (1 + markup / 100);
+
+            document.getElementById('totalPrice').textContent = total.toFixed(2) + ' ₽';
+        }
+
+        function calculateMaterialCost(printType, material, amount) {
+            const materials = printType === 'fdm' 
+                ? config.costComponents.materials.plastic 
+                : config.costComponents.materials.resin;
+
+            const materialData = materials[material];
+            if (!materialData) return 0;
+
+            if (printType === 'fdm') {
+                return (amount / 1000) * materialData.pricePerKg;
+            } else {
+                return (amount / 1000) * materialData.pricePerLiter;
+            }
+        }
+
+        function calculateTimeCost(printType, printTime) {
+            const timeCosts = config.costComponents.timeBasedCosts;
+            const rate = printType === 'fdm' 
+                ? timeCosts.fdmPrinter.costPerMinute 
+                : timeCosts.resinPrinter.costPerMinute;
+            return printTime * rate;
+        }
+
+        function calculateEnergyCost(printType, printTime) {
+            const power = printType === 'fdm'
+                ? config.costComponents.operatingExpenses.powerConsumption.fdmWatts
+                : config.costComponents.operatingExpenses.powerConsumption.resinWatts;
+
+            const electricityPrice = config.costComponents.operatingExpenses.electricityPricePerKwh;
+            const hours = printTime / 60;
+            const kwh = (power * hours) / 1000;
+            return kwh * electricityPrice;
+        }
+
+        function calculateAmortizationCost(printType, printTime) {
+            const amortization = config.costComponents.operatingExpenses.amortization;
+            const hourlyRate = printType === 'fdm'
+                ? amortization.fdmHourlyRate
+                : amortization.resinHourlyRate;
+            return (printTime / 60) * hourlyRate;
+        }
+
+        function calculateFixedCosts(printType, printTime) {
+            const fixedMonthly = config.costComponents.operatingExpenses.fixedMonthlyCosts;
+            const totalMonthly = fixedMonthly.lease + (fixedMonthly.other || 0);
+
+            const printerCount = config.printerFleet.fdmPrinterCount + 1;
+            const targetHoursPerDay = config.printerFleet.targetDailyOperatingHours;
+            const daysPerMonth = 30;
+
+            const totalMinutesPerMonth = printerCount * targetHoursPerDay * daysPerMonth * 60;
+            const costPerMinute = totalMonthly / totalMinutesPerMonth;
+            return printTime * costPerMinute;
+        }
+
+        function calculateConsumablesCost(printType, printTime) {
+            const consumables = config.costComponents.operatingExpenses.consumables;
+            if (!consumables) return 0;
+
+            const rate = printType === 'fdm'
+                ? (consumables.fdmPerHour || 0)
+                : (consumables.resinPerHour || 0);
+            return (printTime / 60) * rate;
+        }
+
+        function getMarkup(printType) {
+            const markup = config.costComponents.operatingExpenses.operatorMarkupPercent;
+            return printType === 'fdm' ? markup.fdm : markup.resin;
+        }
+
+        // === ЗАПУСК ===
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
