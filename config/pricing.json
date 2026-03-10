@@ -12,20 +12,20 @@
     "resin": 1000
   },
   "discountTiers": [
-    { "min": 1, "max": 19, "discount": 0 },
-    { "min": 20, "max": 49, "discount": 10 },
-    { "min": 50, "max": 99, "discount": 20 },
-    { "min": 100, "discount": 30 }
+    { "min": 2, "max": 10, "discount": 2 },
+    { "min": 11, "max": 50, "discount": 5 },
+    { "min": 51, "max": 99, "discount": 10 },
+    { "min": 100, "discount": 15 }
   ],
   "costComponents": {
     "materials": {
       "plastic": {
-        "pla": { "name": "PLA", "pricePerKg": 2500 },
-        "petg": { "name": "PET-G", "pricePerKg": 3200 },
-        "abs": { "name": "ABS", "pricePerKg": 2800 }
+        "pla": { "name": "PLA", "pricePerKg": 2300 },
+        "petg": { "name": "PET-G", "pricePerKg": 2300 },
+        "abs": { "name": "ABS", "pricePerKg": 2300 }
       },
       "resin": {
-        "basic": { "name": "Базовая смола", "pricePerLiter": 5500 },
+        "basic": { "name": "Базовая смола", "pricePerLiter": 2500 },
         "improved": { "name": "Улучшенная смола", "pricePerLiter": 7500 },
         "constructive": { "name": "Конструкторская смола", "pricePerLiter": 12000 }
       }
@@ -35,12 +35,12 @@
       "resinPrinter": { "costPerMinute": 1.2 }
     },
     "operatingExpenses": {
-      "powerConsumption": { "fdmWatts": 400, "resinWatts": 150 },
-      "electricityPricePerKwh": 5.5,
+      "powerConsumption": { "fdmWatts": 700, "resinWatts": 250 },
+      "electricityPricePerKwh": 6,
       "amortization": { "fdmHourlyRate": 50, "resinHourlyRate": 150 },
-      "fixedMonthlyCosts": { "lease": 30000, "other": 10000 },
+      "fixedMonthlyCosts": { "lease": 70000, "other": 10000 },
       "consumables": { "fdmPerHour": 20, "resinPerHour": 50 },
-      "operatorMarkupPercent": { "fdm": 25, "resin": 35 }
+      "operatorMarkupPercent": { "fdm": 30, "resin": 45 }
     }
   }
 }
