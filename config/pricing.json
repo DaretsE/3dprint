@@ -7,6 +7,12 @@
     "fdmPrinterCount": 5,
     "targetDailyOperatingHours": 20
   },
+  "discountTiers": [
+    { "min": 1, "max": 19, "discount": 0 },
+    { "min": 20, "max": 49, "discount": 10 },
+    { "min": 50, "max": 99, "discount": 20 },
+    { "min": 100, "discount": 30 }
+  ],
   "costComponents": {
     "materials": {
       "plastic": {
