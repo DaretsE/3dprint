@@ -7,550 +7,1421 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gray-50: #f8f9fa; --gray-100: #f1f3f5; --gray-200: #e9ecef;
-            --gray-300: #dee2e6; --gray-400: #ced4da; --gray-500: #adb5bd;
-            --gray-600: #868e96; --gray-700: #495057; --gray-800: #343a40; --gray-900: #212529;
-            --blue-50: #e7f5ff; --blue-100: #d0ebff; --blue-200: #a5d8ff;
-            --blue-300: #74c0fc; --blue-400: #4dabf7; --blue-500: #339af0;
-            --blue-600: #228be6; --blue-700: #1c7ed6; --blue-800: #1971c2; --blue-900: #1864ab;
-            --orange-50: #fff4e6; --orange-100: #ffe8cc; --orange-200: #ffd8a8;
-            --orange-300: #ffc078; --orange-400: #ffa94d; --orange-500: #ff922b;
-            --orange-600: #fd7e14; --orange-700: #f76707; --orange-800: #e8590c; --orange-900: #d9480f;
-            --green-50: #ebfbee; --green-100: #d3f9d8; --green-500: #40c057;
-            --green-600: #37b24d; --green-700: #2b8a3e;
-            --success-bg: #ebfbee; --success-text: #2b8a3e;
-            --error-bg: #fff5f5; --error-text: #c92a2a;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,.05); --shadow-md: 0 4px 12px rgba(0,0,0,.08);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,.12); --shadow-xl: 0 12px 40px rgba(0,0,0,.16);
-            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px;
+            --gray-50: #f8f9fa;
+            --gray-100: #f1f3f5;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #868e96;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            
+            --blue-50: #e7f5ff;
+            --blue-100: #d0ebff;
+            --blue-200: #a5d8ff;
+            --blue-300: #74c0fc;
+            --blue-400: #4dabf7;
+            --blue-500: #339af0;
+            --blue-600: #228be6;
+            --blue-700: #1c7ed6;
+            --blue-800: #1971c2;
+            --blue-900: #1864ab;
+            
+            --orange-50: #fff4e6;
+            --orange-100: #ffe8cc;
+            --orange-200: #ffd8a8;
+            --orange-300: #ffc078;
+            --orange-400: #ffa94d;
+            --orange-500: #ff922b;
+            --orange-600: #fd7e14;
+            --orange-700: #f76707;
+            --orange-800: #e8590c;
+            --orange-900: #d9480f;
+            
+            --green-50: #ebfbee;
+            --green-100: #d3f9d8;
+            --green-500: #40c057;
+            --green-600: #37b24d;
+            --green-700: #2b8a3e;
+            
+            --success-bg: #ebfbee;
+            --success-text: #2b8a3e;
+            --error-bg: #fff5f5;
+            --error-text: #c92a2a;
+            
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.16);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
         }
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,var(--gray-100) 0%,var(--gray-200) 50%,var(--blue-50) 100%);min-height:100vh;color:var(--gray-800);line-height:1.6;padding:20px}
-        .container{max-width:760px;margin:0 auto}
-        header{text-align:center;padding:40px 20px 30px}
-        header h1{color:var(--gray-900);font-weight:700;font-size:2.2rem;letter-spacing:-.5px;margin-bottom:8px}
-        header .subtitle{color:var(--gray-600);font-size:1rem;font-weight:500}
-        section{background:#fff;border-radius:var(--radius-lg);padding:28px;margin-bottom:16px;box-shadow:var(--shadow-md);border:1px solid var(--gray-200);transition:all .3s ease;animation:fadeInUp .5s ease-out}
-        section:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
-        section h3{color:var(--gray-800);margin-bottom:20px;font-size:1.15rem;font-weight:600;display:flex;align-items:center;gap:10px}
-        section h3 .icon{font-size:1.4rem}
-        .upload-area{border:2px dashed var(--gray-300);border-radius:var(--radius-md);padding:50px 25px;text-align:center;cursor:pointer;transition:all .3s ease;background:linear-gradient(135deg,var(--gray-50) 0%,var(--blue-50) 100%)}
-        .upload-area:hover,.upload-area.dragover{border-color:var(--blue-500);background:linear-gradient(135deg,var(--blue-50) 0%,var(--blue-100) 100%);transform:scale(1.01)}
-        .upload-icon{font-size:4rem;margin-bottom:15px;display:block}
-        .upload-area p{color:var(--gray-700);font-weight:500;margin-bottom:5px}
-        .supported-formats{color:var(--gray-500);font-size:.85rem;margin-top:8px}
-        .viewer-container{height:400px;background:linear-gradient(135deg,var(--gray-100) 0%,var(--gray-200) 100%);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--gray-300);position:relative}
-        #canvas-container{width:100%;height:100%;display:block}
-        #canvas-container canvas{display:block;width:100%!important;height:100%!important}
-        .viewer-controls{position:absolute;bottom:15px;right:15px;display:flex;gap:8px;background:rgba(255,255,255,.95);padding:8px 12px;border-radius:var(--radius-sm);font-size:.8rem;color:var(--gray-600);box-shadow:var(--shadow-sm);flex-wrap:wrap}
-        .viewer-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(240,242,245,.92);font-size:1rem;color:var(--gray-600);font-weight:500;gap:12px;z-index:10}
-        .viewer-loading .spinner{width:40px;height:40px;border:4px solid var(--gray-300);border-top-color:var(--blue-500);border-radius:50%;animation:spin .8s linear infinite}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-        .info-card{background:var(--gray-50);padding:20px;border-radius:var(--radius-md);border:1px solid var(--gray-200)}
-        .info-card h3{font-size:1rem;margin-bottom:15px}
-        .info-data{display:flex;flex-direction:column;gap:8px;color:var(--gray-600);font-size:.95rem}
-        .info-data b{color:var(--gray-800);font-weight:600}
-        .compatibility-status{display:flex;flex-direction:column;gap:10px}
-        .status-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fff;border-radius:var(--radius-sm);font-size:.9rem;font-weight:500;border:1px solid var(--gray-200);transition:all .3s ease}
-        .status-item.compatible{background:var(--success-bg);color:var(--success-text);border-color:var(--success-text)}
-        .status-item.incompatible{background:var(--error-bg);color:var(--error-text);border-color:var(--error-text)}
-        .status-icon{font-size:1.3rem}
-        .radio-group{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-        .radio-label{display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;padding:16px 20px;background:var(--gray-50);border-radius:var(--radius-md);transition:all .3s ease;border:2px solid var(--gray-200);font-weight:500;color:var(--gray-700)}
-        .radio-label:hover{background:var(--blue-50);border-color:var(--blue-300)}
-        .radio-label input[type="radio"]{display:none}
-        .radio-label input[type="radio"]:checked+.radio-custom{background:var(--orange-500);border-color:var(--orange-500);box-shadow:0 0 0 4px var(--orange-100)}
-        .radio-label:has(input:checked){border-color:var(--orange-500);background:var(--orange-50);color:var(--orange-800)}
-        .radio-custom{width:22px;height:22px;border:2px solid var(--gray-400);border-radius:50%;display:inline-block;transition:all .3s ease;position:relative}
-        .radio-custom::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:10px;background:#fff;border-radius:50%;opacity:0;transition:opacity .3s ease}
-        .radio-label:has(input:checked) .radio-custom::after{opacity:1}
-        .form-select,.form-input{width:100%;padding:14px 18px;border:2px solid var(--gray-200);border-radius:var(--radius-md);font-size:1rem;font-family:inherit;transition:all .3s ease;background:#fff;color:var(--gray-800);font-weight:500}
-        .form-select:hover,.form-input:hover{border-color:var(--gray-300)}
-        .form-select:focus,.form-input:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 4px var(--blue-100)}
-        .params-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-        .time-inputs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-        .form-group{display:flex;flex-direction:column;gap:10px}
-        .form-group label{color:var(--gray-700);font-weight:600;font-size:.95rem}
-        .input-with-unit{position:relative}
-        .input-with-unit input{padding-right:70px}
-        .input-unit{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--gray-500);font-weight:500;font-size:.9rem;pointer-events:none}
-        .quantity-section{background:linear-gradient(135deg,var(--orange-50) 0%,var(--orange-100) 100%);border-color:var(--orange-200)}
-        .quantity-section h3{color:var(--orange-800)}
-        .quantity-input-wrapper{display:flex;align-items:center;gap:15px}
-        .quantity-icon{font-size:1.5rem;color:var(--orange-600)}
-        .discount-display{margin-top:15px;padding:12px 16px;background:var(--green-50);border:1px solid var(--green-500);border-radius:var(--radius-md);color:var(--green-700);font-weight:600;display:none}
-        .discount-display.visible{display:flex;align-items:center;gap:10px}
-        .discount-display .icon{font-size:1.3rem}
-        .total-card{background:linear-gradient(135deg,var(--blue-600) 0%,var(--blue-800) 100%);color:#fff;padding:35px 30px;border-radius:var(--radius-lg);text-align:center;box-shadow:var(--shadow-xl);position:relative;overflow:hidden}
-        .total-card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);pointer-events:none}
-        .total-card h3{color:#fff;margin-bottom:15px;font-size:1.1rem;font-weight:500;opacity:.95}
-        .total-price{font-size:3rem;font-weight:700;letter-spacing:-1px;text-shadow:0 2px 10px rgba(0,0,0,.2)}
-        .total-price::after{content:'';display:block;width:60px;height:4px;background:var(--orange-400);margin:15px auto 0;border-radius:2px}
-        .discount-note{margin-top:15px;padding:12px 16px;background:rgba(255,255,255,.15);border-radius:var(--radius-md);font-size:.9rem;display:none}
-        .discount-note.visible{display:block}
-        .discount-note .percent{color:var(--orange-300);font-weight:700;font-size:1.1rem}
-        .saved-info{margin-top:10px;font-size:.85rem;opacity:.9}
-        .saved-info .original{text-decoration:line-through;opacity:.7;margin-right:10px}
-        .saved-info .amount{color:var(--orange-300);font-weight:600}
-        .minimum-order-section{background:linear-gradient(135deg,var(--gray-800) 0%,var(--gray-900) 100%);border-color:var(--gray-700);color:#fff;display:none;margin-top:16px}
-        .minimum-order-section.visible{display:block;animation:fadeInUp .5s ease-out}
-        .minimum-order-section h3{color:#fff;margin-bottom:15px}
-        .minimum-order-info{display:flex;align-items:center;justify-content:center;gap:12px;font-size:1.1rem;font-weight:600;padding:15px;background:rgba(255,255,255,.1);border-radius:var(--radius-md)}
-        .minimum-order-info .icon{font-size:1.5rem}
-        .minimum-order-info .amount{color:var(--orange-400);font-size:1.3rem}
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        ::-webkit-scrollbar{width:10px}
-        ::-webkit-scrollbar-track{background:var(--gray-100);border-radius:5px}
-        ::-webkit-scrollbar-thumb{background:var(--gray-400);border-radius:5px}
-        ::-webkit-scrollbar-thumb:hover{background:var(--gray-500)}
-        @media(max-width:640px){
-            body{padding:12px} header h1{font-size:1.7rem} section{padding:22px}
-            .info-grid,.params-grid,.time-inputs-grid,.radio-group{grid-template-columns:1fr}
-            .total-price{font-size:2.3rem} .upload-icon{font-size:3rem}
-            .quantity-input-wrapper{flex-direction:column;align-items:stretch}
-            .viewer-container{height:300px} .viewer-controls{flex-direction:column;gap:4px;font-size:.75rem}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        *:focus-visible{outline:3px solid var(--blue-400);outline-offset:2px}
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button{opacity:1;margin-right:10px}
-    </style>
-</head>
-<body>
-<div class="container">
-    <header>
-        <h1>🖨️ Калькулятор 3D-печати</h1>
-        <p class="subtitle">Быстрый расчёт стоимости печати за секунды</p>
-    </header>
 
-    <section class="upload-section">
-        <h3><span class="icon">📁</span> Загрузка 3D модели</h3>
-        <div class="upload-area" id="uploadArea">
-            <span class="upload-icon">📦</span>
-            <p>Перетащите файл сюда или нажмите для выбора</p>
-            <p class="supported-formats">STL • OBJ • 3MF</p>
-        </div>
-        <input type="file" id="fileInput" accept=".stl,.obj,.3mf" hidden>
-    </section>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--blue-50) 100%);
+            min-height: 100vh;
+            color: var(--gray-800);
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-    <section class="viewer-section" id="viewerSection" style="display:none">
-        <h3><span class="icon">👁️</span> Просмотр модели</h3>
-        <div class="viewer-container">
-            <div id="canvas-container"></div>
-            <div class="viewer-loading" id="viewerLoading" style="display:none">
-                <div class="spinner"></div>
-                <span>Загрузка модели...</span>
-            </div>
-            <div class="viewer-controls">
-                <span>🖱️ ЛКМ — вращение</span>
-                <span>🔍 Колесо — зум</span>
-                <span>👆 ПКМ — панорама</span>
-            </div>
-        </div>
-    </section>
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+        }
 
-    <section class="model-info-section" id="modelInfoSection" style="display:none">
-        <h3><span class="icon">📊</span> Информация о модели</h3>
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>📏 Размеры модели</h3>
-                <div class="info-data">
-                    <span>X: <b id="sizeX">0</b> мм</span>
-                    <span>Y: <b id="sizeY">0</b> мм</span>
-                    <span>Z: <b id="sizeZ">0</b> мм</span>
-                </div>
-            </div>
-            <div class="info-card">
-                <h3>✅ Совместимость</h3>
-                <div class="compatibility-status">
-                    <div class="status-item" id="fdmStatus"><span class="status-icon">⭕</span><span>FDM (250×250×250 мм)</span></div>
-                    <div class="status-item" id="resinStatus"><span class="status-icon">⭕</span><span>Фотополимер (215×121×218 мм)</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
 
-    <section class="print-type-section">
-        <h3><span class="icon">🔧</span> Тип печати</h3>
-        <div class="radio-group">
-            <label class="radio-label"><input type="radio" name="printType" value="fdm" checked><span class="radio-custom"></span>FDM печать</label>
-            <label class="radio-label"><input type="radio" name="printType" value="resin"><span class="radio-custom"></span>Фотополимерная</label>
-        </div>
-    </section>
+        header h1 {
+            color: var(--gray-900);
+            font-weight: 700;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
 
-    <section class="material-section">
-        <h3><span class="icon">🧪</span> Материал</h3>
-        <select id="materialSelect" class="form-select"></select>
-    </section>
+        header .subtitle {
+            color: var(--gray-600);
+            font-size: 1rem;
+            font-weight: 500;
+        }
 
-    <section class="print-params-section">
-        <h3><span class="icon">⚙️</span> Параметры печати</h3>
-        <div class="params-grid">
-            <div class="form-group">
-                <label>⏱️ Время печати</label>
-                <div class="time-inputs-grid">
-                    <div class="input-with-unit"><input type="number" id="printHours" class="form-input" min="0" value="0"><span class="input-unit">часов</span></div>
-                    <div class="input-with-unit"><input type="number" id="printMinutes" class="form-input" min="0" max="59" value="0"><span class="input-unit">минут</span></div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="materialAmount" id="materialAmountLabel">📦 Расход материала</label>
-                <div class="input-with-unit"><input type="number" id="materialAmount" class="form-input" min="0" value="0"><span class="input-unit" id="materialUnit">грамм</span></div>
-            </div>
-        </div>
-    </section>
+        /* Cards */
+        section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
 
-    <section class="quantity-section">
-        <h3><span class="icon">📦</span> Тираж</h3>
-        <div class="quantity-input-wrapper">
-            <span class="quantity-icon">🔢</span>
-            <div class="input-with-unit" style="flex:1"><input type="number" id="quantity" class="form-input" min="1" value="1"><span class="input-unit">штук</span></div>
-        </div>
-        <div class="discount-display" id="discountDisplay"><span class="icon">🎉</span><span id="discountText">Скидка 0%</span></div>
-    </section>
+        section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
 
-    <section class="total-section">
-        <div class="total-card">
-            <h3>💰 Итоговая стоимость</h3>
-            <div class="total-price" id="totalPrice">0.00 ₽</div>
-            <div class="discount-note" id="discountNote">
-                <div>Цена с учётом скидки <span class="percent" id="discountPercentNote">0</span>%</div>
-                <div class="saved-info">
-                    <span class="original" id="originalPrice">0.00 ₽</span>
-                    <span class="amount" id="savedAmount">Экономия 0.00 ₽</span>
-                </div>
-            </div>
-        </div>
-        <div class="minimum-order-section" id="minimumOrderSection">
-            <h3><span class="icon">⚠️</span> Минимальный заказ</h3>
-            <div class="minimum-order-info">
-                <span class="icon">📋</span>
-                <span>Минимальная стоимость заказа:</span>
-                <span class="amount" id="minimumOrderAmount">0 ₽</span>
-            </div>
-        </div>
-    </section>
-</div>
+        section h3 {
+            color: var(--gray-800);
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-<script type="module">
-// ─── Импорты через esm.sh — стабильный CDN, работает на GitHub Pages ──────────
-// unpkg + importmap иногда не работает на GitHub Pages из-за ограничений CORS
-// и отсутствия поддержки importmap в некоторых браузерах.
-// esm.sh раздаёт ES-модули напрямую без importmap.
-import * as THREE          from 'https://esm.sh/three@0.160.0';
-import { OrbitControls }   from 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-import { STLLoader }       from 'https://esm.sh/three@0.160.0/examples/jsm/loaders/STLLoader.js';
-import { OBJLoader }       from 'https://esm.sh/three@0.160.0/examples/jsm/loaders/OBJLoader.js';
-import { ThreeMFLoader }   from 'https://esm.sh/three@0.160.0/examples/jsm/loaders/3MFLoader.js';
+        section h3 .icon {
+            font-size: 1.4rem;
+        }
 
-// ═══════════════ СОСТОЯНИЕ ════════════════════════════════════════════════════
-let config = null;
-let scene, camera, renderer, controls, model, boxHelper;
-let viewerInitialized = false;
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-md);
+            padding: 50px 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--blue-50) 100%);
+        }
 
-// ═══════════════ ИНИЦИАЛИЗАЦИЯ ════════════════════════════════════════════════
-async function init() {
-    await loadConfig();
-    setupEventListeners();
-    updateMaterialOptions();
-    calculateTotal();
-}
+        .upload-area:hover,
+        .upload-area.dragover {
+            border-color: var(--blue-500);
+            background: linear-gradient(135deg, var(--blue-50) 0%, var(--blue-100) 100%);
+            transform: scale(1.01);
+        }
 
-// ═══════════════ КОНФИГУРАЦИЯ ═════════════════════════════════════════════════
-async function loadConfig() {
-    try {
-        const r = await fetch('config/pricing.json');
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        config = await r.json();
-    } catch (e) {
-        console.error('Ошибка загрузки конфигурации:', e);
-        alert('Не удалось загрузить config/pricing.json');
-    }
-}
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
 
-// ═══════════════ 3D ПРОСМОТРЩИК ══════════════════════════════════════════════
-function init3DViewer() {
-    if (viewerInitialized) return;
-    const container = document.getElementById('canvas-container');
-    if (!container) return;
+        .upload-area p {
+            color: var(--gray-700);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
 
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f2f5);
+        .supported-formats {
+            color: var(--gray-500);
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
 
-    const w = container.clientWidth  || 600;
-    const h = container.clientHeight || 400;
+        /* 3D Viewer */
+        .viewer-container {
+            height: 400px;
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--gray-300);
+            position: relative;
+        }
 
-    camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100000);
-    camera.position.set(200, 200, 200);
-    camera.lookAt(0, 0, 0);
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
 
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0xf0f2f5, 1);
-    container.innerHTML = '';
-    container.appendChild(renderer.domElement);
+        #canvas-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
 
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping   = true;
-    controls.dampingFactor   = 0.05;
-    controls.screenSpacePanning = false;
-    controls.minDistance     = 1;
-    controls.maxDistance     = 100000;
+        .viewer-controls {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            box-shadow: var(--shadow-sm);
+        }
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-    const dl1 = new THREE.DirectionalLight(0xffffff, 1.0);
-    dl1.position.set(100, 100, 100); dl1.castShadow = true;
-    scene.add(dl1);
-    const dl2 = new THREE.DirectionalLight(0xffffff, 0.5);
-    dl2.position.set(-100, -100, -100);
-    scene.add(dl2);
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
 
-    scene.add(new THREE.GridHelper(500, 50, 0xcccccc, 0xe0e0e0));
-    scene.add(new THREE.AxesHelper(100));
+        .info-card {
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+        }
 
-    (function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    })();
+        .info-card h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
 
-    window.addEventListener('resize', () => {
-        const w = container.clientWidth, h = container.clientHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-    });
+        .info-data {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
 
-    viewerInitialized = true;
-}
+        .info-data b {
+            color: var(--gray-800);
+            font-weight: 600;
+        }
 
-// ═══════════════ СОБЫТИЯ ══════════════════════════════════════════════════════
-function setupEventListeners() {
-    const area  = document.getElementById('uploadArea');
-    const input = document.getElementById('fileInput');
-    area.addEventListener('click', () => input.click());
-    area.addEventListener('dragover',  e => { e.preventDefault(); area.classList.add('dragover'); });
-    area.addEventListener('dragleave', () => area.classList.remove('dragover'));
-    area.addEventListener('drop', e => {
-        e.preventDefault(); area.classList.remove('dragover');
-        if (e.dataTransfer.files[0]) loadModel(e.dataTransfer.files[0]);
-    });
-    input.addEventListener('change', e => { if (e.target.files[0]) loadModel(e.target.files[0]); });
+        /* Compatibility Status */
+        .compatibility-status {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    document.querySelectorAll('input[name="printType"]').forEach(r => r.addEventListener('change', () => {
-        updateMaterialOptions(); calculateTotal(); if (model) checkCompatibilityFromModel();
-    }));
-    ['materialSelect','printHours','printMinutes','materialAmount','quantity']
-        .forEach(id => document.getElementById(id).addEventListener('input', calculateTotal));
-}
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
 
-// ═══════════════ ЗАГРУЗКА МОДЕЛИ ══════════════════════════════════════════════
-function loadModel(file) {
-    const ext = file.name.split('.').pop().toLowerCase();
+        .status-item.compatible {
+            background: var(--success-bg);
+            color: var(--success-text);
+            border-color: var(--success-text);
+        }
 
-    // Показываем секцию просмотра и спиннер сразу
-    document.getElementById('viewerSection').style.display = 'block';
-    document.getElementById('viewerLoading').style.display = 'flex';
+        .status-item.incompatible {
+            background: var(--error-bg);
+            color: var(--error-text);
+            border-color: var(--error-text);
+        }
 
-    // Инициализируем сцену (один раз)
-    init3DViewer();
+        .status-icon {
+            font-size: 1.3rem;
+        }
 
-    const reader = new FileReader();
-    reader.onload = e => {
-        try {
-            // Удаляем предыдущую модель
-            if (model)     { scene.remove(model);     disposeObject(model);              model     = null; }
-            if (boxHelper) { scene.remove(boxHelper);  if (boxHelper.geometry) boxHelper.geometry.dispose(); boxHelper = null; }
+        /* Radio Buttons */
+        .radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
 
-            switch (ext) {
-                case 'stl': {
-                    const geo = new STLLoader().parse(e.target.result);
-                    geo.center(); geo.computeVertexNormals();
-                    model = new THREE.Mesh(geo, new THREE.MeshPhongMaterial({
-                        color: 0x339af0, specular: 0x111111, shininess: 200, side: THREE.DoubleSide
-                    }));
-                    model.castShadow = model.receiveShadow = true;
-                    break;
-                }
-                case 'obj': {
-                    model = new OBJLoader().parse(e.target.result);
-                    model.traverse(c => { if (c.isMesh) { c.material = new THREE.MeshPhongMaterial({ color: 0x339af0, side: THREE.DoubleSide }); c.castShadow = c.receiveShadow = true; } });
-                    break;
-                }
-                case '3mf': {
-                    model = new ThreeMFLoader().parse(e.target.result);
-                    model.traverse(c => { if (c.isMesh) { c.material = new THREE.MeshPhongMaterial({ color: 0x339af0, side: THREE.DoubleSide }); c.castShadow = c.receiveShadow = true; } });
-                    break;
-                }
-                default:
-                    alert('Неподдерживаемый формат. Используйте STL, OBJ или 3MF');
-                    document.getElementById('viewerLoading').style.display = 'none';
-                    return;
+        .radio-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 16px 20px;
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            border: 2px solid var(--gray-200);
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .radio-label:hover {
+            background: var(--blue-50);
+            border-color: var(--blue-300);
+        }
+
+        .radio-label input[type="radio"] {
+            display: none;
+        }
+
+        .radio-label input[type="radio"]:checked + .radio-custom {
+            background: var(--orange-500);
+            border-color: var(--orange-500);
+            box-shadow: 0 0 0 4px var(--orange-100);
+        }
+
+        .radio-label:has(input:checked) {
+            border-color: var(--orange-500);
+            background: var(--orange-50);
+            color: var(--orange-800);
+        }
+
+        .radio-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gray-400);
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .radio-label:has(input:checked) .radio-custom::after {
+            opacity: 1;
+        }
+
+        /* Form Elements */
+        .form-select,
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #fff;
+            color: var(--gray-800);
+            font-weight: 500;
+        }
+
+        .form-select:hover,
+        .form-input:hover {
+            border-color: var(--gray-300);
+        }
+
+        .form-select:focus,
+        .form-input:focus {
+            outline: none;
+            border-color: var(--blue-500);
+            box-shadow: 0 0 0 4px var(--blue-100);
+        }
+
+        .form-select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23868e96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 45px;
+        }
+
+        /* Params Grid */
+        .params-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .time-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            color: var(--gray-700);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .input-with-unit {
+            position: relative;
+        }
+
+        .input-with-unit input {
+            padding-right: 70px;
+        }
+
+        .input-unit {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            font-weight: 500;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* Quantity Section */
+        .quantity-section {
+            background: linear-gradient(135deg, var(--orange-50) 0%, var(--orange-100) 100%);
+            border-color: var(--orange-200);
+        }
+
+        .quantity-section h3 {
+            color: var(--orange-800);
+        }
+
+        .quantity-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-input-wrapper .form-input {
+            flex: 1;
+        }
+
+        .quantity-icon {
+            font-size: 1.5rem;
+            color: var(--orange-600);
+        }
+
+        .discount-display {
+            margin-top: 15px;
+            padding: 12px 16px;
+            background: var(--green-50);
+            border: 1px solid var(--green-500);
+            border-radius: var(--radius-md);
+            color: var(--green-700);
+            font-weight: 600;
+            display: none;
+        }
+
+        .discount-display.visible {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discount-display .icon {
+            font-size: 1.3rem;
+        }
+
+        /* Total Card - БЕЗ анимации */
+        .total-card {
+            background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
+            color: white;
+            padding: 35px 30px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .total-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .total-card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        .total-price {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .total-price::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--orange-400);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .discount-note {
+            margin-top: 15px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .discount-note.visible {
+            display: block;
+        }
+
+        .discount-note .percent {
+            color: var(--orange-300);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .saved-info {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .saved-info .original {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 10px;
+        }
+
+        .saved-info .amount {
+            color: var(--orange-300);
+            font-weight: 600;
+        }
+
+        /* Minimum Order - отдельный блок ПОД итоговой стоимостью */
+        .minimum-order-section {
+            background: linear-gradient(135deg, var(--orange-50) 0%, var(--orange-100) 100%);
+            border: 2px solid var(--orange-300);
+            color: var(--orange-800);
+            display: none;
+            margin-top: 16px;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+
+        .minimum-order-section.visible {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .minimum-order-section h3 {
+            color: var(--orange-800);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .minimum-order-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .minimum-order-info .icon {
+            font-size: 1.3rem;
+        }
+
+        .minimum-order-info .amount {
+            color: var(--orange-600);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .minimum-order-info .text {
+            color: var(--orange-700);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
             }
 
-            scene.add(model);
-            boxHelper = new THREE.BoxHelper(model, 0xff6b6b);
-            scene.add(boxHelper);
+            header h1 {
+                font-size: 1.7rem;
+            }
 
-            centerAndFitModel();
-            showModelInfo();
+            section {
+                padding: 22px;
+            }
 
-            document.getElementById('modelInfoSection').style.display = 'block';
-            document.getElementById('viewerLoading').style.display   = 'none';
-            renderer.render(scene, camera); // немедленный рендер
-        } catch (err) {
-            console.error('Ошибка загрузки модели:', err);
-            document.getElementById('viewerLoading').style.display = 'none';
-            alert('Ошибка загрузки модели: ' + err.message);
+            .info-grid,
+            .params-grid,
+            .time-inputs-grid,
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+
+            .total-price {
+                font-size: 2.3rem;
+            }
+
+            .upload-icon {
+                font-size: 3rem;
+            }
+
+            .quantity-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .viewer-container {
+                height: 300px;
+            }
         }
-    };
-    reader.onerror = () => { document.getElementById('viewerLoading').style.display = 'none'; alert('Ошибка чтения файла'); };
 
-    // STL — бинарный буфер; OBJ и 3MF — текст
-    ext === 'stl' ? reader.readAsArrayBuffer(file) : reader.readAsText(file);
-}
+        /* Focus visible */
+        *:focus-visible {
+            outline: 3px solid var(--blue-400);
+            outline-offset: 2px;
+        }
 
-function disposeObject(obj) {
-    obj.traverse(c => {
-        if (c.geometry) c.geometry.dispose();
-        if (c.material) { (Array.isArray(c.material) ? c.material : [c.material]).forEach(m => m.dispose()); }
-    });
-}
+        /* Number input arrows */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 1;
+            margin-right: 10px;
+        }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖨️ Калькулятор 3D-печати</h1>
+            <p class="subtitle">Быстрый расчёт стоимости печати за секунды</p>
+        </header>
 
-// ═══════════════ КАМЕРА ═══════════════════════════════════════════════════════
-function centerAndFitModel() {
-    if (!model) return;
-    const box    = new THREE.Box3().setFromObject(model);
-    const center = box.getCenter(new THREE.Vector3());
-    const size   = box.getSize(new THREE.Vector3());
-    const maxDim = Math.max(size.x, size.y, size.z);
-    if (maxDim === 0) return;
+        <!-- 1. Загрузка модели -->
+        <section class="upload-section">
+            <h3><span class="icon">📁</span> Загрузка 3D модели</h3>
+            <div class="upload-area" id="uploadArea">
+                <span class="upload-icon">📦</span>
+                <p>Перетащите файл сюда или нажмите для выбора</p>
+                <p class="supported-formats">STL • OBJ • 3MF</p>
+            </div>
+            <input type="file" id="fileInput" accept=".stl,.obj,.3mf" hidden>
+        </section>
 
-    model.position.sub(center);
-    if (boxHelper) boxHelper.update();
+        <!-- 2. 3D Просмотрщик (появляется после загрузки) -->
+        <section class="viewer-section" id="viewerSection" style="display: none;">
+            <h3><span class="icon">👁️</span> Просмотр модели</h3>
+            <div class="viewer-container">
+                <div id="canvas-container"></div>
+                <div class="viewer-controls">
+                    <span>🖱️ ЛКМ - вращение</span>
+                    <span>🔍 Колесо - зум</span>
+                    <span>👆 ПКМ - панорама</span>
+                </div>
+            </div>
+        </section>
 
-    const fovRad = THREE.MathUtils.degToRad(camera.fov);
-    const dist   = ((maxDim / 2) / Math.tan(fovRad / 2)) * 2.0;
+        <!-- 3. Информация о модели (появляется после загрузки) -->
+        <section class="model-info-section" id="modelInfoSection" style="display: none;">
+            <h3><span class="icon">📊</span> Информация о модели</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📏 Размеры модели</h3>
+                    <div class="info-data">
+                        <span>X: <b id="sizeX">0</b> мм</span>
+                        <span>Y: <b id="sizeY">0</b> мм</span>
+                        <span>Z: <b id="sizeZ">0</b> мм</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>✅ Совместимость</h3>
+                    <div class="compatibility-status">
+                        <div class="status-item" id="fdmStatus">
+                            <span class="status-icon">⭕</span>
+                            <span>FDM (250×250×250 мм)</span>
+                        </div>
+                        <div class="status-item" id="resinStatus">
+                            <span class="status-icon">⭕</span>
+                            <span>Фотополимер (215×121×218 мм)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    camera.near = dist / 1000;
-    camera.far  = dist * 100;
-    camera.updateProjectionMatrix();
-    camera.position.set(dist, dist * 0.7, dist);
-    camera.lookAt(0, 0, 0);
+        <!-- 4. Выбор типа печати -->
+        <section class="print-type-section">
+            <h3><span class="icon">🔧</span> Тип печати</h3>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="printType" value="fdm" checked>
+                    <span class="radio-custom"></span>
+                    FDM печать
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="printType" value="resin">
+                    <span class="radio-custom"></span>
+                    Фотополимерная
+                </label>
+            </div>
+        </section>
 
-    controls.target.set(0, 0, 0);
-    controls.minDistance = dist * 0.05;
-    controls.maxDistance = dist * 20;
-    controls.update();
-}
+        <!-- 5. Выбор материала -->
+        <section class="material-section">
+            <h3><span class="icon">🧪</span> Материал</h3>
+            <select id="materialSelect" class="form-select"></select>
+        </section>
 
-// ═══════════════ ИНФОРМАЦИЯ ═══════════════════════════════════════════════════
-function showModelInfo() {
-    if (!model) return;
-    const size = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
-    document.getElementById('sizeX').textContent = size.x.toFixed(2);
-    document.getElementById('sizeY').textContent = size.y.toFixed(2);
-    document.getElementById('sizeZ').textContent = size.z.toFixed(2);
-    checkCompatibilityFromModel();
-}
+        <!-- 6. Параметры печати -->
+        <section class="print-params-section">
+            <h3><span class="icon">⚙️</span> Параметры печати</h3>
+            <div class="params-grid">
+                <div class="form-group">
+                    <label>⏱️ Время печати</label>
+                    <div class="time-inputs-grid">
+                        <div class="input-with-unit">
+                            <input type="number" id="printHours" class="form-input" min="0" value="0">
+                            <span class="input-unit">часов</span>
+                        </div>
+                        <div class="input-with-unit">
+                            <input type="number" id="printMinutes" class="form-input" min="0" max="59" value="0">
+                            <span class="input-unit">минут</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="materialAmount" class="form-input" min="0" value="0">
+                        <span class="input-unit" id="materialUnit">грамм</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-function checkCompatibilityFromModel() {
-    if (!model) return;
-    const s = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
-    updateStatus('fdmStatus',   s.x <= 250 && s.y <= 250 && s.z <= 250);
-    updateStatus('resinStatus', s.x <= 215 && s.y <= 121 && s.z <= 218);
-}
+        <!-- 7. Тираж -->
+        <section class="quantity-section">
+            <h3><span class="icon">📦</span> Тираж</h3>
+            <div class="quantity-input-wrapper">
+                <span class="quantity-icon">🔢</span>
+                <div class="input-with-unit" style="flex: 1;">
+                    <input type="number" id="quantity" class="form-input" min="1" value="1">
+                    <span class="input-unit">штук</span>
+                </div>
+            </div>
+            <div class="discount-display" id="discountDisplay">
+                <span class="icon">🎉</span>
+                <span id="discountText">Скидка 0%</span>
+            </div>
+        </section>
 
-function updateStatus(id, ok) {
-    const el = document.getElementById(id);
-    el.classList.toggle('compatible',   ok);
-    el.classList.toggle('incompatible', !ok);
-    el.querySelector('.status-icon').textContent = ok ? '✅' : '❌';
-}
+        <!-- 8. Итоговая стоимость -->
+        <section class="total-section">
+            <div class="total-card">
+                <h3>💰 Итоговая стоимость</h3>
+                <div class="total-price" id="totalPrice">0.00 ₽</div>
+                <div class="discount-note" id="discountNote">
+                    <div>Цена с учётом скидки <span class="percent" id="discountPercentNote">0</span>%</div>
+                    <div class="saved-info">
+                        <span class="original" id="originalPrice">0.00 ₽</span>
+                        <span class="amount" id="savedAmount">Экономия 0.00 ₽</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 9. Минимальная стоимость заказа (отдельный блок ПОД ценой) -->
+            <div class="minimum-order-section" id="minimumOrderSection">
+                <h3><span class="icon">⚠️</span> Обратите внимание</h3>
+                <div class="minimum-order-info">
+                    <span class="icon">📋</span>
+                    <span class="text">Минимальная стоимость заказа:</span>
+                    <span class="amount" id="minimumOrderAmount">0 ₽</span>
+                </div>
+            </div>
+        </section>
+    </div>
 
-// ═══════════════ МАТЕРИАЛЫ ════════════════════════════════════════════════════
-function updateMaterialOptions() {
-    const type   = document.querySelector('input[name="printType"]:checked').value;
-    const select = document.getElementById('materialSelect');
-    select.innerHTML = '';
-    if (!config) return;
-    const mats = type === 'fdm' ? config.costComponents.materials.plastic : config.costComponents.materials.resin;
-    document.getElementById('materialUnit').textContent = type === 'fdm' ? 'грамм' : 'мл';
-    for (const [k, v] of Object.entries(mats)) {
-        const o = document.createElement('option'); o.value = k; o.textContent = v.name; select.appendChild(o);
-    }
-    calculateTotal();
-}
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+        import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+        import { ThreeMFLoader } from 'three/addons/loaders/3MFLoader.js';
 
-// ═══════════════ КАЛЬКУЛЯТОР ══════════════════════════════════════════════════
-function getDiscount(qty) {
-    if (!config?.discountTiers) return 0;
-    let d = 0;
-    for (const t of config.discountTiers) if (qty >= t.min && (!t.max || qty <= t.max)) d = t.discount;
-    return d;
-}
+        // === КОНФИГУРАЦИЯ ===
+        let config = null;
 
-function calculateTotal() {
-    if (!config) return;
-    const type   = document.querySelector('input[name="printType"]:checked').value;
-    const mat    = document.getElementById('materialSelect').value;
-    const hours  = parseFloat(document.getElementById('printHours').value)    || 0;
-    const mins   = parseFloat(document.getElementById('printMinutes').value)  || 0;
-    const time   = hours * 60 + mins;
-    const amount = parseFloat(document.getElementById('materialAmount').value) || 0;
-    const qty    = parseInt(document.getElementById('quantity').value)         || 1;
+        // === 3D СЦЕНА ===
+        let scene = null;
+        let camera = null;
+        let renderer = null;
+        let controls = null;
+        let model = null;
+        let boxHelper = null;
+        let viewerInitialized = false;
+        let animationId = null;
 
-    const c = config.costComponents;
-    const mats = type === 'fdm' ? c.materials.plastic : c.materials.resin;
-    const m    = mats[mat];
-    const matCost  = m ? (type === 'fdm' ? (amount/1000)*m.pricePerKg : (amount/1000)*m.pricePerLiter) : 0;
-    const rate     = type === 'fdm' ? c.timeBasedCosts.fdmPrinter.costPerMinute : c.timeBasedCosts.resinPrinter.costPerMinute;
-    const timeCost = time * rate;
-    const power    = type === 'fdm' ? c.operatingExpenses.powerConsumption.fdmWatts : c.operatingExpenses.powerConsumption.resinWatts;
-    const elecCost = (power * (time/60) / 1000) * c.operatingExpenses.electricityPricePerKwh;
-    const amort    = c.operatingExpenses.amortization;
-    const amortCost= (time/60) * (type==='fdm' ? amort.fdmHourlyRate : amort.resinHourlyRate);
-    const fixed    = c.operatingExpenses.fixedMonthlyCosts;
-    const fl       = config.printerFleet;
-    const fixedCost= ((fixed.lease + (fixed.other||0)) / ((fl.fdmPrinterCount+1)*fl.targetDailyOperatingHours*30*60)) * time;
-    const cons     = c.operatingExpenses.consumables;
-    const consCost = cons ? (time/60) * (type==='fdm' ? (cons.fdmPerHour||0) : (cons.resinPerHour||0)) : 0;
+        // === ИНИЦИАЛИЗАЦИЯ ===
+        async function init() {
+            await loadConfig();
+            setupEventListeners();
+            updateMaterialOptions();
+            calculateTotal();
+        }
 
-    const markup  = c.operatingExpenses.operatorMarkupPercent;
-    const pct     = type === 'fdm' ? markup.fdm : markup.resin;
-    const perItem = (matCost+timeCost+elecCost+amortCost+fixedCost+consCost) * (1 + pct/100);
-    const total   = perItem * qty;
-    const disc    = getDiscount(qty);
-    const saved   = total * (disc/100);
-    const final   = total - saved;
-    const minOrder= type === 'fdm' ? config.minimumOrder.fdm : config.minimumOrder.resin;
+        // === ЗАГРУЗКА КОНФИГУРАЦИИ ===
+        async function loadConfig() {
+            try {
+                const response = await fetch('config/pricing.json');
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                config = await response.json();
+                console.log('Config loaded:', config);
+            } catch (error) {
+                console.error('Ошибка загрузки конфигурации:', error);
+                alert('Не удалось загрузить конфигурацию цен. Проверьте файл pricing.json');
+            }
+        }
 
-    const minSec = document.getElementById('minimumOrderSection');
-    if (final < minOrder) {
-        minSec.classList.add('visible');
-        document.getElementById('minimumOrderAmount').textContent = minOrder.toFixed(2) + ' ₽';
-        document.getElementById('totalPrice').textContent         = minOrder.toFixed(2) + ' ₽';
-    } else {
-        minSec.classList.remove('visible');
-        document.getElementById('totalPrice').textContent = final.toFixed(2) + ' ₽';
-    }
+        // === 3D ПРОСМОТРЩИК ===
+        function init3DViewer() {
+            if (viewerInitialized) {
+                console.log('Viewer already initialized');
+                return;
+            }
+            
+            const container = document.getElementById('canvas-container');
+            if (!container) {
+                console.error('Canvas container not found');
+                return;
+            }
+            
+            console.log('Initializing 3D viewer...');
+            
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f2f5);
 
-    const dd = document.getElementById('discountDisplay'), dn = document.getElementById('discountNote');
-    if (disc > 0) {
-        dd.classList.add('visible');
-        document.getElementById('discountText').textContent        = `Скидка ${disc}% за тираж`;
-        dn.classList.add('visible');
-        document.getElementById('discountPercentNote').textContent = disc;
-        document.getElementById('originalPrice').textContent       = total.toFixed(2) + ' ₽';
-        document.getElementById('savedAmount').textContent         = `Экономия ${saved.toFixed(2)} ₽`;
-    } else {
-        dd.classList.remove('visible'); dn.classList.remove('visible');
-    }
-}
+            camera = new THREE.PerspectiveCamera(
+                45,
+                container.clientWidth / container.clientHeight,
+                0.1,
+                10000
+            );
+            camera.position.set(200, 200, 200);
+            camera.lookAt(0, 0, 0);
 
-document.addEventListener('DOMContentLoaded', init);
-</script>
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true,
+                preserveDrawingBuffer: true
+            });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.setClearColor(0xf0f2f5, 1);
+            
+            container.innerHTML = '';
+            container.appendChild(renderer.domElement);
+            
+            console.log('Renderer created, DOM element added');
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.screenSpacePanning = false;
+            controls.minDistance = 10;
+            controls.maxDistance = 1000;
+            controls.enableRotate = true;
+            controls.enableZoom = true;
+            controls.enablePan = true;
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+            directionalLight.position.set(100, 100, 100);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight2.position.set(-100, -100, -100);
+            scene.add(directionalLight2);
+
+            const gridHelper = new THREE.GridHelper(500, 50, 0xcccccc, 0xe0e0e0);
+            scene.add(gridHelper);
+
+            const axesHelper = new THREE.AxesHelper(100);
+            scene.add(axesHelper);
+
+            animate();
+            
+            window.addEventListener('resize', onWindowResize);
+            
+            viewerInitialized = true;
+            console.log('3D Viewer initialized successfully');
+        }
+
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+            if (controls) controls.update();
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            if (!container || !camera || !renderer) return;
+            
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        // === СОБЫТИЯ ===
+        function setupEventListeners() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    loadModel(e.dataTransfer.files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    loadModel(e.target.files[0]);
+                }
+            });
+
+            document.querySelectorAll('input[name="printType"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    updateMaterialOptions();
+                    calculateTotal();
+                    if (model) checkCompatibilityFromModel();
+                });
+            });
+
+            document.getElementById('materialSelect').addEventListener('change', calculateTotal);
+            document.getElementById('printHours').addEventListener('input', calculateTotal);
+            document.getElementById('printMinutes').addEventListener('input', calculateTotal);
+            document.getElementById('materialAmount').addEventListener('input', calculateTotal);
+            document.getElementById('quantity').addEventListener('input', calculateTotal);
+        }
+
+        // === ЗАГРУЗКА МОДЕЛИ ===
+        function loadModel(file) {
+            const extension = file.name.split('.').pop().toLowerCase();
+            const reader = new FileReader();
+
+            console.log('Loading model:', file.name, 'Extension:', extension);
+
+            reader.onload = (e) => {
+                const contents = e.target.result;
+                
+                console.log('File loaded, initializing viewer...');
+                
+                init3DViewer();
+
+                setTimeout(() => {
+                    if (model) {
+                        scene.remove(model);
+                        if (model.geometry) {
+                            model.geometry.dispose();
+                        }
+                        if (model.material) {
+                            if (Array.isArray(model.material)) {
+                                model.material.forEach(m => m.dispose());
+                            } else {
+                                model.material.dispose();
+                            }
+                        }
+                        model = null;
+                    }
+                    if (boxHelper) {
+                        scene.remove(boxHelper);
+                        if (boxHelper.geometry) boxHelper.geometry.dispose();
+                        boxHelper = null;
+                    }
+
+                    let loader;
+                    try {
+                        switch (extension) {
+                            case 'stl':
+                                loader = new STLLoader();
+                                const geometry = loader.parse(contents);
+                                geometry.center();
+                                geometry.computeVertexNormals();
+                                model = new THREE.Mesh(
+                                    geometry,
+                                    new THREE.MeshPhongMaterial({ 
+                                        color: 0x339af0, 
+                                        specular: 0x111111, 
+                                        shininess: 200,
+                                        side: THREE.DoubleSide,
+                                        flatShading: false
+                                    })
+                                );
+                                model.castShadow = true;
+                                model.receiveShadow = true;
+                                console.log('STL model created');
+                                break;
+                            case 'obj':
+                                loader = new OBJLoader();
+                                model = loader.parse(contents);
+                                model.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material = new THREE.MeshPhongMaterial({ 
+                                            color: 0x339af0,
+                                            side: THREE.DoubleSide
+                                        });
+                                        child.castShadow = true;
+                                        child.receiveShadow = true;
+                                    }
+                                });
+                                console.log('OBJ model created');
+                                break;
+                            case '3mf':
+                                loader = new ThreeMFLoader();
+                                model = loader.parse(contents);
+                                model.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material = new THREE.MeshPhongMaterial({ 
+                                            color: 0x339af0,
+                                            side: THREE.DoubleSide
+                                        });
+                                        child.castShadow = true;
+                                        child.receiveShadow = true;
+                                    }
+                                });
+                                console.log('3MF model created');
+                                break;
+                            default:
+                                alert('Неподдерживаемый формат файла. Используйте STL, OBJ или 3MF');
+                                return;
+                        }
+
+                        scene.add(model);
+                        console.log('Model added to scene');
+
+                        boxHelper = new THREE.BoxHelper(model, 0xff6b6b);
+                        scene.add(boxHelper);
+                        console.log('BoxHelper added');
+
+                        centerAndFitModel();
+                        
+                        showModelInfo();
+
+                        document.getElementById('viewerSection').style.display = 'block';
+                        document.getElementById('modelInfoSection').style.display = 'block';
+
+                        console.log('Model loaded and displayed successfully');
+                        
+                        if (renderer && scene && camera) {
+                            renderer.render(scene, camera);
+                        }
+                    } catch (error) {
+                        console.error('Error loading model:', error);
+                        alert('Ошибка загрузки модели: ' + error.message + '. Проверьте файл и попробуйте снова.');
+                    }
+                }, 100);
+            };
+
+            reader.onerror = () => {
+                console.error('File read error');
+                alert('Ошибка чтения файла');
+            };
+
+            if (extension === 'stl') {
+                reader.readAsArrayBuffer(file);
+            } else {
+                reader.readAsText(file);
+            }
+        }
+
+        function centerAndFitModel() {
+            if (!model) {
+                console.log('No model to center');
+                return;
+            }
+
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            console.log('Model size:', size);
+
+            model.position.sub(center);
+
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fitHeightDistance = maxDim / (2 * Math.atan(Math.PI * camera.fov / 360));
+            const fitWidthDistance = fitHeightDistance / camera.aspect;
+            const distance = 1.5 * Math.max(fitHeightDistance, fitWidthDistance);
+
+            camera.position.set(distance, distance * 0.8, distance);
+            camera.lookAt(0, 0, 0);
+            if (controls) {
+                controls.target.set(0, 0, 0);
+                controls.update();
+            }
+            
+            console.log('Camera positioned');
+        }
+
+        function showModelInfo() {
+            if (!model) return;
+            
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3());
+
+            document.getElementById('sizeX').textContent = parseFloat(size.x.toFixed(2));
+            document.getElementById('sizeY').textContent = parseFloat(size.y.toFixed(2));
+            document.getElementById('sizeZ').textContent = parseFloat(size.z.toFixed(2));
+
+            checkCompatibilityFromModel();
+        }
+
+        function checkCompatibilityFromModel() {
+            if (!model) return;
+            
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3());
+            checkCompatibility(size.x, size.y, size.z);
+        }
+
+        function checkCompatibility(x, y, z) {
+            const fdmLimits = { x: 250, y: 250, z: 250 };
+            const resinLimits = { x: 215, y: 121, z: 218 };
+
+            const fdmCompatible = x <= fdmLimits.x && y <= fdmLimits.y && z <= fdmLimits.z;
+            const resinCompatible = x <= resinLimits.x && y <= resinLimits.y && z <= resinLimits.z;
+
+            updateStatus('fdmStatus', fdmCompatible);
+            updateStatus('resinStatus', resinCompatible);
+        }
+
+        function updateStatus(elementId, compatible) {
+            const element = document.getElementById(elementId);
+            const icon = element.querySelector('.status-icon');
+            
+            element.classList.remove('compatible', 'incompatible');
+            
+            if (compatible) {
+                element.classList.add('compatible');
+                icon.textContent = '✅';
+            } else {
+                element.classList.add('incompatible');
+                icon.textContent = '❌';
+            }
+        }
+
+        function updateMaterialOptions() {
+            const printType = document.querySelector('input[name="printType"]:checked').value;
+            const select = document.getElementById('materialSelect');
+            const unitLabel = document.getElementById('materialUnit');
+
+            select.innerHTML = '';
+
+            if (!config) return;
+
+            if (printType === 'fdm') {
+                unitLabel.textContent = 'грамм';
+                const materials = config.costComponents.materials.plastic;
+                for (const [key, value] of Object.entries(materials)) {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = value.name;
+                    select.appendChild(option);
+                }
+            } else {
+                unitLabel.textContent = 'мл';
+                const materials = config.costComponents.materials.resin;
+                for (const [key, value] of Object.entries(materials)) {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = value.name;
+                    select.appendChild(option);
+                }
+            }
+
+            calculateTotal();
+        }
+
+        // === ПОЛУЧЕНИЕ СКИДКИ ПО ТИРАЖУ ===
+        function getDiscountByQuantity(quantity) {
+            if (!config || !config.discountTiers) return 0;
+            
+            let discount = 0;
+            for (const tier of config.discountTiers) {
+                if (quantity >= tier.min) {
+                    if (!tier.max || quantity <= tier.max) {
+                        discount = tier.discount;
+                    }
+                }
+            }
+            return discount;
+        }
+
+        // === КАЛЬКУЛЯТОР ===
+        function calculateTotal() {
+            if (!config) return;
+
+            const printType = document.querySelector('input[name="printType"]:checked').value;
+            const material = document.getElementById('materialSelect').value;
+            
+            const hours = parseFloat(document.getElementById('printHours').value) || 0;
+            const minutes = parseFloat(document.getElementById('printMinutes').value) || 0;
+            const totalMinutes = (hours * 60) + minutes;
+            
+            const materialAmount = parseFloat(document.getElementById('materialAmount').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+            // Расчёт стоимости для 1 изделия
+            const materialCost = calculateMaterialCost(printType, material, materialAmount);
+            const timeCost = calculateTimeCost(printType, totalMinutes);
+            const energyCost = calculateEnergyCost(printType, totalMinutes);
+            const amortizationCost = calculateAmortizationCost(printType, totalMinutes);
+            const fixedCosts = calculateFixedCosts(printType, totalMinutes);
+            const consumablesCost = calculateConsumablesCost(printType, totalMinutes);
+
+            const subtotal = materialCost + timeCost + energyCost + amortizationCost + fixedCosts + consumablesCost;
+            const markup = getMarkup(printType);
+            const pricePerItem = subtotal * (1 + markup / 100);
+
+            // Общая стоимость до скидки
+            const totalBeforeDiscount = pricePerItem * quantity;
+
+            // Получаем скидку по тиражу
+            const discountPercent = getDiscountByQuantity(quantity);
+            const discountAmount = totalBeforeDiscount * (discountPercent / 100);
+            const totalAfterDiscount = totalBeforeDiscount - discountAmount;
+
+            // ✅ ПОКАЗЫВАЕМ РЕАЛЬНУЮ рассчитанную стоимость
+            document.getElementById('totalPrice').textContent = totalAfterDiscount.toFixed(2) + ' ₽';
+
+            // Проверяем минимальную стоимость заказа
+            const minimumOrder = printType === 'fdm' 
+                ? config.minimumOrder.fdm 
+                : config.minimumOrder.resin;
+
+            const minimumOrderSection = document.getElementById('minimumOrderSection');
+            
+            // ✅ Показываем блок минимального заказа ТОЛЬКО если цена ниже минимума
+            if (totalAfterDiscount < minimumOrder) {
+                minimumOrderSection.classList.add('visible');
+                document.getElementById('minimumOrderAmount').textContent = minimumOrder.toFixed(2) + ' ₽';
+            } else {
+                minimumOrderSection.classList.remove('visible');
+            }
+
+            // Показываем информацию о скидке
+            const discountDisplay = document.getElementById('discountDisplay');
+            const discountNote = document.getElementById('discountNote');
+            
+            if (discountPercent > 0) {
+                discountDisplay.classList.add('visible');
+                document.getElementById('discountText').textContent = `Скидка ${discountPercent}% за тираж`;
+                
+                discountNote.classList.add('visible');
+                document.getElementById('discountPercentNote').textContent = discountPercent;
+                document.getElementById('originalPrice').textContent = totalBeforeDiscount.toFixed(2) + ' ₽';
+                document.getElementById('savedAmount').textContent = `Экономия ${discountAmount.toFixed(2)} ₽`;
+            } else {
+                discountDisplay.classList.remove('visible');
+                discountNote.classList.remove('visible');
+            }
+        }
+
+        function calculateMaterialCost(printType, material, amount) {
+            const materials = printType === 'fdm' 
+                ? config.costComponents.materials.plastic 
+                : config.costComponents.materials.resin;
+
+            const materialData = materials[material];
+            if (!materialData) return 0;
+
+            if (printType === 'fdm') {
+                return (amount / 1000) * materialData.pricePerKg;
+            } else {
+                return (amount / 1000) * materialData.pricePerLiter;
+            }
+        }
+
+        function calculateTimeCost(printType, printTime) {
+            const timeCosts = config.costComponents.timeBasedCosts;
+            const rate = printType === 'fdm' 
+                ? timeCosts.fdmPrinter.costPerMinute 
+                : timeCosts.resinPrinter.costPerMinute;
+            return printTime * rate;
+        }
+
+        function calculateEnergyCost(printType, printTime) {
+            const power = printType === 'fdm'
+                ? config.costComponents.operatingExpenses.powerConsumption.fdmWatts
+                : config.costComponents.operatingExpenses.powerConsumption.resinWatts;
+
+            const electricityPrice = config.costComponents.operatingExpenses.electricityPricePerKwh;
+            const hours = printTime / 60;
+            const kwh = (power * hours) / 1000;
+            return kwh * electricityPrice;
+        }
+
+        function calculateAmortizationCost(printType, printTime) {
+            const amortization = config.costComponents.operatingExpenses.amortization;
+            const hourlyRate = printType === 'fdm'
+                ? amortization.fdmHourlyRate
+                : amortization.resinHourlyRate;
+            return (printTime / 60) * hourlyRate;
+        }
+
+        function calculateFixedCosts(printType, printTime) {
+            const fixedMonthly = config.costComponents.operatingExpenses.fixedMonthlyCosts;
+            const totalMonthly = fixedMonthly.lease + (fixedMonthly.other || 0);
+
+            const printerCount = config.printerFleet.fdmPrinterCount + 1;
+            const targetHoursPerDay = config.printerFleet.targetDailyOperatingHours;
+            const daysPerMonth = 30;
+
+            const totalMinutesPerMonth = printerCount * targetHoursPerDay * daysPerMonth * 60;
+            const costPerMinute = totalMonthly / totalMinutesPerMonth;
+            return printTime * costPerMinute;
+        }
+
+        function calculateConsumablesCost(printType, printTime) {
+            const consumables = config.costComponents.operatingExpenses.consumables;
+            if (!consumables) return 0;
+
+            const rate = printType === 'fdm'
+                ? (consumables.fdmPerHour || 0)
+                : (consumables.resinPerHour || 0);
+            return (printTime / 60) * rate;
+        }
+
+        function getMarkup(printType) {
+            const markup = config.costComponents.operatingExpenses.operatorMarkupPercent;
+            return printType === 'fdm' ? markup.fdm : markup.resin;
+        }
+
+        // === ЗАПУСК ===
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
