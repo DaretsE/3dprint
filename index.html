@@ -184,17 +184,24 @@
             display: block;
         }
 
+        #canvas-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
         .viewer-controls {
             position: absolute;
             bottom: 15px;
             right: 15px;
             display: flex;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 8px 12px;
             border-radius: var(--radius-sm);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--gray-600);
+            box-shadow: var(--shadow-sm);
         }
 
         /* Info Grid */
@@ -461,7 +468,7 @@
             font-size: 1.3rem;
         }
 
-        /* Total Card */
+        /* Total Card - БЕЗ анимации */
         .total-card {
             background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
             color: white;
@@ -545,20 +552,23 @@
             font-weight: 600;
         }
 
-        /* Minimum Order */
+        /* Minimum Order - отдельный блок */
         .minimum-order-section {
             background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
             border-color: var(--gray-700);
             color: white;
             display: none;
+            margin-top: 16px;
         }
 
         .minimum-order-section.visible {
             display: block;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         .minimum-order-section h3 {
             color: white;
+            margin-bottom: 15px;
         }
 
         .minimum-order-info {
@@ -568,6 +578,9 @@
             gap: 12px;
             font-size: 1.1rem;
             font-weight: 600;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
         }
 
         .minimum-order-info .icon {
@@ -591,17 +604,8 @@
             }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
         section {
             animation: fadeInUp 0.5s ease-out;
-        }
-
-        .total-card {
-            animation: pulse 3s ease-in-out infinite;
         }
 
         /* Scrollbar */
@@ -710,6 +714,7 @@
                 <div class="viewer-controls">
                     <span>🖱️ ЛКМ - вращение</span>
                     <span>🔍 Колесо - зум</span>
+                    <span>👆 ПКМ - панорама</span>
                 </div>
             </div>
         </section>
@@ -821,15 +826,15 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- 9. Минимальная стоимость заказа -->
-        <section class="minimum-order-section" id="minimumOrderSection">
-            <h3><span class="icon">⚠️</span> Минимальный заказ</h3>
-            <div class="minimum-order-info">
-                <span class="icon">📋</span>
-                <span>Минимальная стоимость заказа:</span>
-                <span class="amount" id="minimumOrderAmount">0 ₽</span>
+            
+            <!-- 9. Минимальная стоимость заказа (отдельный блок) -->
+            <div class="minimum-order-section" id="minimumOrderSection">
+                <h3><span class="icon">⚠️</span> Минимальный заказ</h3>
+                <div class="minimum-order-info">
+                    <span class="icon">📋</span>
+                    <span>Минимальная стоимость заказа:</span>
+                    <span class="amount" id="minimumOrderAmount">0 ₽</span>
+                </div>
             </div>
         </section>
     </div>
@@ -866,7 +871,11 @@
         async function loadConfig() {
             try {
                 const response = await fetch('config/pricing.json');
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
                 config = await response.json();
+                console.log('Config loaded:', config);
             } catch (error) {
                 console.error('Ошибка загрузки конфигурации:', error);
                 alert('Не удалось загрузить конфигурацию цен. Проверьте файл pricing.json');
@@ -875,10 +884,18 @@
 
         // === 3D ПРОСМОТРЩИК ===
         function init3DViewer() {
-            if (viewerInitialized) return;
+            if (viewerInitialized) {
+                console.log('Viewer already initialized');
+                return;
+            }
             
             const container = document.getElementById('canvas-container');
-            if (!container) return;
+            if (!container) {
+                console.error('Canvas container not found');
+                return;
+            }
+            
+            console.log('Initializing 3D viewer...');
             
             // Создаём сцену
             scene = new THREE.Scene();
@@ -892,19 +909,24 @@
                 10000
             );
             camera.position.set(200, 200, 200);
+            camera.lookAt(0, 0, 0);
 
             // Рендерер
             renderer = new THREE.WebGLRenderer({ 
                 antialias: true,
-                alpha: true
+                alpha: true,
+                preserveDrawingBuffer: true
             });
             renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.shadowMap.enabled = true;
+            renderer.setClearColor(0xf0f2f5, 1);
             
             // Очищаем контейнер и добавляем canvas
             container.innerHTML = '';
             container.appendChild(renderer.domElement);
+            
+            console.log('Renderer created, DOM element added');
 
             // Контролы
             controls = new OrbitControls(camera, renderer.domElement);
@@ -913,17 +935,20 @@
             controls.screenSpacePanning = false;
             controls.minDistance = 10;
             controls.maxDistance = 1000;
+            controls.enableRotate = true;
+            controls.enableZoom = true;
+            controls.enablePan = true;
 
             // Свет
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambientLight);
 
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
             directionalLight.position.set(100, 100, 100);
             directionalLight.castShadow = true;
             scene.add(directionalLight);
 
-            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
             directionalLight2.position.set(-100, -100, -100);
             scene.add(directionalLight2);
 
@@ -942,7 +967,7 @@
             window.addEventListener('resize', onWindowResize);
             
             viewerInitialized = true;
-            console.log('3D Viewer initialized');
+            console.log('3D Viewer initialized successfully');
         }
 
         function animate() {
@@ -1017,94 +1042,120 @@
             reader.onload = (e) => {
                 const contents = e.target.result;
                 
+                console.log('File loaded, initializing viewer...');
+                
                 // Инициализируем 3D просмотрщик
                 init3DViewer();
 
-                // Удаляем старую модель
-                if (model) {
-                    scene.remove(model);
-                    if (model.geometry) model.geometry.dispose();
-                    if (model.material) model.material.dispose();
-                    model = null;
-                }
-                if (boxHelper) {
-                    scene.remove(boxHelper);
-                    boxHelper = null;
-                }
-
-                let loader;
-                try {
-                    switch (extension) {
-                        case 'stl':
-                            loader = new STLLoader();
-                            const geometry = loader.parse(contents);
-                            geometry.center();
-                            model = new THREE.Mesh(
-                                geometry,
-                                new THREE.MeshPhongMaterial({ 
-                                    color: 0x339af0, 
-                                    specular: 0x111111, 
-                                    shininess: 200,
-                                    side: THREE.DoubleSide
-                                })
-                            );
-                            model.castShadow = true;
-                            model.receiveShadow = true;
-                            break;
-                        case 'obj':
-                            loader = new OBJLoader();
-                            model = loader.parse(contents);
-                            model.traverse((child) => {
-                                if (child.isMesh) {
-                                    child.material = new THREE.MeshPhongMaterial({ 
-                                        color: 0x339af0,
-                                        side: THREE.DoubleSide
-                                    });
-                                    child.castShadow = true;
-                                    child.receiveShadow = true;
-                                }
-                            });
-                            break;
-                        case '3mf':
-                            loader = new ThreeMFLoader();
-                            model = loader.parse(contents);
-                            model.traverse((child) => {
-                                if (child.isMesh) {
-                                    child.material = new THREE.MeshPhongMaterial({ 
-                                        color: 0x339af0,
-                                        side: THREE.DoubleSide
-                                    });
-                                    child.castShadow = true;
-                                    child.receiveShadow = true;
-                                }
-                            });
-                            break;
-                        default:
-                            alert('Неподдерживаемый формат файла. Используйте STL, OBJ или 3MF');
-                            return;
+                // Небольшая задержка чтобы viewer успел инициализироваться
+                setTimeout(() => {
+                    // Удаляем старую модель
+                    if (model) {
+                        scene.remove(model);
+                        if (model.geometry) {
+                            model.geometry.dispose();
+                        }
+                        if (model.material) {
+                            if (Array.isArray(model.material)) {
+                                model.material.forEach(m => m.dispose());
+                            } else {
+                                model.material.dispose();
+                            }
+                        }
+                        model = null;
+                    }
+                    if (boxHelper) {
+                        scene.remove(boxHelper);
+                        if (boxHelper.geometry) boxHelper.geometry.dispose();
+                        boxHelper = null;
                     }
 
-                    scene.add(model);
+                    let loader;
+                    try {
+                        switch (extension) {
+                            case 'stl':
+                                loader = new STLLoader();
+                                const geometry = loader.parse(contents);
+                                geometry.center();
+                                geometry.computeVertexNormals();
+                                model = new THREE.Mesh(
+                                    geometry,
+                                    new THREE.MeshPhongMaterial({ 
+                                        color: 0x339af0, 
+                                        specular: 0x111111, 
+                                        shininess: 200,
+                                        side: THREE.DoubleSide,
+                                        flatShading: false
+                                    })
+                                );
+                                model.castShadow = true;
+                                model.receiveShadow = true;
+                                console.log('STL model created');
+                                break;
+                            case 'obj':
+                                loader = new OBJLoader();
+                                model = loader.parse(contents);
+                                model.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material = new THREE.MeshPhongMaterial({ 
+                                            color: 0x339af0,
+                                            side: THREE.DoubleSide
+                                        });
+                                        child.castShadow = true;
+                                        child.receiveShadow = true;
+                                    }
+                                });
+                                console.log('OBJ model created');
+                                break;
+                            case '3mf':
+                                loader = new ThreeMFLoader();
+                                model = loader.parse(contents);
+                                model.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material = new THREE.MeshPhongMaterial({ 
+                                            color: 0x339af0,
+                                            side: THREE.DoubleSide
+                                        });
+                                        child.castShadow = true;
+                                        child.receiveShadow = true;
+                                    }
+                                });
+                                console.log('3MF model created');
+                                break;
+                            default:
+                                alert('Неподдерживаемый формат файла. Используйте STL, OBJ или 3MF');
+                                return;
+                        }
 
-                    // Добавляем ограничивающий параллелепипед
-                    boxHelper = new THREE.BoxHelper(model, 0xff6b6b);
-                    scene.add(boxHelper);
+                        scene.add(model);
+                        console.log('Model added to scene');
 
-                    // Центрируем и подгоняем камеру
-                    centerAndFitModel();
-                    
-                    // Показываем информацию
-                    showModelInfo();
+                        // Добавляем ограничивающий параллелепипед
+                        boxHelper = new THREE.BoxHelper(model, 0xff6b6b);
+                        scene.add(boxHelper);
+                        console.log('BoxHelper added');
 
-                    // Показываем секции
-                    document.getElementById('viewerSection').style.display = 'block';
-                    document.getElementById('modelInfoSection').style.display = 'block';
+                        // Центрируем и подгоняем камеру
+                        centerAndFitModel();
+                        
+                        // Показываем информацию
+                        showModelInfo();
 
-                    console.log('Model loaded successfully');
-                } catch (error) {
-                    console.error('Error loading model:', error);
-                    alert('Ошибка загрузки модели. Проверьте файл и попробуйте снова.');
-                }
+                        // Показываем секции
+                        document.getElementById('viewerSection').style.display = 'block';
+                        document.getElementById('modelInfoSection').style.display = 'block';
+
+                        console.log('Model loaded and displayed successfully');
+                        
+                        // Принудительный рендер
+                        if (renderer && scene && camera) {
+                            renderer.render(scene, camera);
+                        }
+                    } catch (error) {
+                        console.error('Error loading model:', error);
+                        alert('Ошибка загрузки модели: ' + error.message + '. Проверьте файл и попробуйте снова.');
+                    }
+                }, 100);
             };
 
             reader.onerror = () => {
@@ -1120,11 +1171,16 @@
         }
 
         function centerAndFitModel() {
-            if (!model) return;
+            if (!model) {
+                console.log('No model to center');
+                return;
+            }
 
             const box = new THREE.Box3().setFromObject(model);
             const center = box.getCenter(new THREE.Vector3());
             const size = box.getSize(new THREE.Vector3());
+
+            console.log('Model size:', size);
 
             // Центрируем модель
             model.position.sub(center);
@@ -1137,7 +1193,12 @@
 
             camera.position.set(distance, distance * 0.8, distance);
             camera.lookAt(0, 0, 0);
-            if (controls) controls.update();
+            if (controls) {
+                controls.target.set(0, 0, 0);
+                controls.update();
+            }
+            
+            console.log('Camera positioned');
         }
 
         function showModelInfo() {
@@ -1276,15 +1337,14 @@
             const minimumOrderSection = document.getElementById('minimumOrderSection');
             
             if (totalAfterDiscount < minimumOrder) {
-                totalAfterDiscount = minimumOrder;
                 minimumOrderSection.classList.add('visible');
                 document.getElementById('minimumOrderAmount').textContent = minimumOrder.toFixed(2) + ' ₽';
+                // Показываем минимальную цену как итоговую
+                document.getElementById('totalPrice').textContent = minimumOrder.toFixed(2) + ' ₽';
             } else {
                 minimumOrderSection.classList.remove('visible');
+                document.getElementById('totalPrice').textContent = totalAfterDiscount.toFixed(2) + ' ₽';
             }
-
-            // Обновляем интерфейс
-            document.getElementById('totalPrice').textContent = totalAfterDiscount.toFixed(2) + ' ₽';
 
             // Показываем информацию о скидке
             const discountDisplay = document.getElementById('discountDisplay');
