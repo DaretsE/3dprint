@@ -82,7 +82,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
             text-align: center;
             padding: 40px 20px 30px;
@@ -102,7 +101,6 @@
             font-weight: 500;
         }
 
-        /* Cards */
         section {
             background: #ffffff;
             border-radius: var(--radius-lg);
@@ -132,7 +130,6 @@
             font-size: 1.4rem;
         }
 
-        /* Upload Area */
         .upload-area {
             border: 2px dashed var(--gray-300);
             border-radius: var(--radius-md);
@@ -168,7 +165,6 @@
             margin-top: 8px;
         }
 
-        /* 3D Viewer */
         .viewer-container {
             height: 400px;
             background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
@@ -206,7 +202,6 @@
             pointer-events: none;
         }
 
-        /* Info Grid */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -238,7 +233,6 @@
             font-weight: 600;
         }
 
-        /* Compatibility Status */
         .compatibility-status {
             display: flex;
             flex-direction: column;
@@ -274,7 +268,6 @@
             font-size: 1.3rem;
         }
 
-        /* Radio Buttons */
         .radio-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -345,7 +338,6 @@
             opacity: 1;
         }
 
-        /* Form Elements */
         .form-select,
         .form-input {
             width: 100%;
@@ -374,13 +366,12 @@
 
         .form-select {
             cursor: pointer;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23868e96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23868e96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 16px center;
             padding-right: 45px;
         }
 
-        /* Params Grid */
         .params-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -424,7 +415,6 @@
             pointer-events: none;
         }
 
-        /* Quantity Section */
         .quantity-section {
             background: linear-gradient(135deg, var(--orange-50) 0%, var(--orange-100) 100%);
             border-color: var(--orange-200);
@@ -470,7 +460,6 @@
             font-size: 1.3rem;
         }
 
-        /* Total Card */
         .total-card {
             background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
             color: white;
@@ -561,7 +550,6 @@
             font-weight: 600;
         }
 
-        /* Minimum Order */
         .minimum-order-section {
             background: linear-gradient(135deg, var(--orange-50) 0%, var(--orange-100) 100%);
             border: 2px solid var(--orange-300);
@@ -606,7 +594,6 @@
             color: var(--orange-700);
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -622,7 +609,6 @@
             animation: fadeInUp 0.5s ease-out;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -641,7 +627,6 @@
             background: var(--gray-500);
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
             body {
                 padding: 12px;
@@ -680,26 +665,42 @@
             }
         }
 
-        /* Focus visible */
         *:focus-visible {
             outline: 3px solid var(--blue-400);
             outline-offset: 2px;
         }
 
-        /* Number input arrows */
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
             opacity: 1;
             margin-right: 10px;
         }
+
+        /* Loading indicator */
+        .loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray-300);
+            border-top-color: var(--blue-500);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
-    
-    <!-- Подключаем Three.js через CDN для работы на GitHub Pages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/STLLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/3MFLoader.js"></script>
 </head>
 <body>
     <div class="container">
@@ -853,6 +854,14 @@
         </section>
     </div>
 
+    <!-- Three.js через CDN (надёжная загрузка) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/3MFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/fflate.min.js"></script>
+
     <script>
         // === КОНФИГУРАЦИЯ ===
         let config = null;
@@ -867,11 +876,33 @@
         let viewerInitialized = false;
         let animationId = null;
 
+        // === ПРОВЕРКА ЗАГРУЗКИ THREE.JS ===
+        function checkThreeJS() {
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js не загружен!');
+                return false;
+            }
+            console.log('Three.js версия:', THREE.REVISION);
+            console.log('STLLoader доступен:', typeof THREE.STLLoader !== 'undefined');
+            console.log('OBJLoader доступен:', typeof THREE.OBJLoader !== 'undefined');
+            console.log('ThreeMFLoader доступен:', typeof THREE.ThreeMFLoader !== 'undefined');
+            console.log('OrbitControls доступен:', typeof THREE.OrbitControls !== 'undefined');
+            return true;
+        }
+
         // === ИНИЦИАЛИЗАЦИЯ ===
         async function init() {
-            await loadConfig();
-            setupEventListeners();
-            updateMaterialOptions();
+            // Ждём загрузки Three.js
+            setTimeout(async () => {
+                if (!checkThreeJS()) {
+                    alert('Ошибка загрузки 3D библиотек. Обновите страницу.');
+                    return;
+                }
+                
+                await loadConfig();
+                setupEventListeners();
+                updateMaterialOptions();
+            }, 500);
         }
 
         // === ЗАГРУЗКА КОНФИГУРАЦИИ ===
@@ -1046,6 +1077,10 @@
 
             console.log('Loading model:', file.name, 'Extension:', extension);
 
+            // Показываем индикатор загрузки
+            const container = document.getElementById('canvas-container');
+            container.innerHTML = '<div class="loading-indicator"><div class="loading-spinner"></div><p>Загрузка модели...</p></div>';
+
             reader.onload = (e) => {
                 const contents = e.target.result;
                 
@@ -1080,8 +1115,8 @@
                     try {
                         switch (extension) {
                             case 'stl':
-                                const loader = new THREE.STLLoader();
-                                const geometry = loader.parse(contents);
+                                const stlLoader = new THREE.STLLoader();
+                                const geometry = stlLoader.parse(contents);
                                 geometry.center();
                                 geometry.computeVertexNormals();
                                 model = new THREE.Mesh(
@@ -1160,13 +1195,15 @@
                     } catch (error) {
                         console.error('Error loading model:', error);
                         alert('Ошибка загрузки модели: ' + error.message + '. Проверьте файл и попробуйте снова.');
+                        container.innerHTML = '';
                     }
-                }, 100);
+                }, 200);
             };
 
             reader.onerror = () => {
                 console.error('File read error');
                 alert('Ошибка чтения файла');
+                container.innerHTML = '';
             };
 
             if (extension === 'stl') {
@@ -1320,12 +1357,11 @@
             const discountNote = document.getElementById('discountNote');
             const minimumOrderSection = document.getElementById('minimumOrderSection');
 
-            // ✅ ПРОВЕРКА: Показываем цену ТОЛЬКО если введены И время И расход материала
+            // ПРОВЕРКА: Показываем цену ТОЛЬКО если введены И время И расход материала
             const hasTime = totalMinutes > 0;
             const hasMaterial = materialAmount > 0;
 
             if (!hasTime || !hasMaterial) {
-                // Скрываем цену, показываем placeholder
                 totalPriceEl.style.display = 'none';
                 totalPlaceholderEl.style.display = 'block';
                 discountNote.classList.remove('visible');
@@ -1333,11 +1369,9 @@
                 return;
             }
 
-            // Показываем цену, скрываем placeholder
             totalPriceEl.style.display = 'block';
             totalPlaceholderEl.style.display = 'none';
 
-            // Расчёт стоимости для 1 изделия
             const materialCost = calculateMaterialCost(printType, material, materialAmount);
             const timeCost = calculateTimeCost(printType, totalMinutes);
             const energyCost = calculateEnergyCost(printType, totalMinutes);
@@ -1349,23 +1383,18 @@
             const markup = getMarkup(printType);
             const pricePerItem = subtotal * (1 + markup / 100);
 
-            // Общая стоимость до скидки
             const totalBeforeDiscount = pricePerItem * quantity;
 
-            // Получаем скидку по тиражу
             const discountPercent = getDiscountByQuantity(quantity);
             const discountAmount = totalBeforeDiscount * (discountPercent / 100);
             const totalAfterDiscount = totalBeforeDiscount - discountAmount;
 
-            // ✅ ПОКАЗЫВАЕМ РЕАЛЬНУЮ рассчитанную стоимость
             totalPriceEl.textContent = totalAfterDiscount.toFixed(2) + ' ₽';
 
-            // Проверяем минимальную стоимость заказа
             const minimumOrder = printType === 'fdm' 
                 ? config.minimumOrder.fdm 
                 : config.minimumOrder.resin;
             
-            // Показываем блок минимального заказа ТОЛЬКО если цена ниже минимума
             if (totalAfterDiscount < minimumOrder) {
                 minimumOrderSection.classList.add('visible');
                 document.getElementById('minimumOrderAmount').textContent = minimumOrder.toFixed(2) + ' ₽';
@@ -1373,7 +1402,6 @@
                 minimumOrderSection.classList.remove('visible');
             }
 
-            // Показываем информацию о скидке
             const discountDisplay = document.getElementById('discountDisplay');
             
             if (discountPercent > 0) {
@@ -1461,7 +1489,7 @@
         }
 
         // === ЗАПУСК ===
-        document.addEventListener('DOMContentLoaded', init);
+        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
