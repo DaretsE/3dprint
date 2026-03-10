@@ -132,23 +132,11 @@
             font-size: 1.4rem;
         }
 
-        /* Optional Badge */
-        .optional-badge {
-            display: inline-block;
-            background: var(--blue-50);
-            color: var(--blue-700);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
         /* Upload Area */
         .upload-area {
             border: 2px dashed var(--gray-300);
             border-radius: var(--radius-md);
-            padding: 45px 25px;
+            padding: 50px 25px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -163,7 +151,7 @@
         }
 
         .upload-icon {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 15px;
             display: block;
         }
@@ -182,16 +170,31 @@
 
         /* 3D Viewer */
         .viewer-container {
-            height: 380px;
+            height: 400px;
             background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
             border-radius: var(--radius-md);
             overflow: hidden;
             border: 1px solid var(--gray-300);
+            position: relative;
         }
 
         #canvas-container {
             width: 100%;
             height: 100%;
+            display: block;
+        }
+
+        .viewer-controls {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--gray-600);
         }
 
         /* Info Grid */
@@ -437,6 +440,27 @@
             color: var(--orange-600);
         }
 
+        .discount-display {
+            margin-top: 15px;
+            padding: 12px 16px;
+            background: var(--green-50);
+            border: 1px solid var(--green-500);
+            border-radius: var(--radius-md);
+            color: var(--green-700);
+            font-weight: 600;
+            display: none;
+        }
+
+        .discount-display.visible {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discount-display .icon {
+            font-size: 1.3rem;
+        }
+
         /* Total Card */
         .total-card {
             background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
@@ -485,88 +509,74 @@
             border-radius: 2px;
         }
 
-        /* Discount Badge */
-        .discount-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--green-500) 0%, var(--green-600) 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(64, 192, 87, 0.4);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .discount-badge.hidden {
+        .discount-note {
+            margin-top: 15px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
             display: none;
         }
 
-        .discount-badge .icon {
-            font-size: 1.3rem;
+        .discount-note.visible {
+            display: block;
         }
 
-        .discount-info {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-md);
-            font-size: 0.9rem;
+        .discount-note .percent {
+            color: var(--orange-300);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .saved-info {
+            margin-top: 10px;
+            font-size: 0.85rem;
             opacity: 0.9;
         }
 
-        .discount-info .original-price {
+        .saved-info .original {
             text-decoration: line-through;
             opacity: 0.7;
             margin-right: 10px;
         }
 
-        .discount-info .saved-amount {
+        .saved-info .amount {
             color: var(--orange-300);
             font-weight: 600;
         }
 
-        /* Buttons */
-        .btn {
-            display: inline-flex;
+        /* Minimum Order */
+        .minimum-order-section {
+            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+            border-color: var(--gray-700);
+            color: white;
+            display: none;
+        }
+
+        .minimum-order-section.visible {
+            display: block;
+        }
+
+        .minimum-order-section h3 {
+            color: white;
+        }
+
+        .minimum-order-info {
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-md);
-            font-size: 1rem;
+            gap: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            text-decoration: none;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--orange-500) 0%, var(--orange-600) 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(253, 126, 20, 0.35);
+        .minimum-order-info .icon {
+            font-size: 1.5rem;
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--orange-600) 0%, var(--orange-700) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(253, 126, 20, 0.45);
-        }
-
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 2px solid var(--gray-300);
-        }
-
-        .btn-secondary:hover {
-            background: var(--gray-200);
-            border-color: var(--gray-400);
+        .minimum-order-info .amount {
+            color: var(--orange-400);
+            font-size: 1.3rem;
         }
 
         /* Animations */
@@ -592,10 +602,6 @@
 
         .total-card {
             animation: pulse 3s ease-in-out infinite;
-        }
-
-        .discount-badge {
-            animation: pulse 2s ease-in-out infinite;
         }
 
         /* Scrollbar */
@@ -643,12 +649,16 @@
             }
 
             .upload-icon {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
 
             .quantity-input-wrapper {
                 flex-direction: column;
                 align-items: stretch;
+            }
+
+            .viewer-container {
+                height: 300px;
             }
         }
 
@@ -681,90 +691,9 @@
             <p class="subtitle">Быстрый расчёт стоимости печати за секунды</p>
         </header>
 
-        <!-- Выбор типа печати -->
-        <section class="print-type-section">
-            <h3><span class="icon">🔧</span> Тип печати</h3>
-            <div class="radio-group">
-                <label class="radio-label">
-                    <input type="radio" name="printType" value="fdm" checked>
-                    <span class="radio-custom"></span>
-                    FDM печать
-                </label>
-                <label class="radio-label">
-                    <input type="radio" name="printType" value="resin">
-                    <span class="radio-custom"></span>
-                    Фотополимерная
-                </label>
-            </div>
-        </section>
-
-        <!-- Выбор материала -->
-        <section class="material-section">
-            <h3><span class="icon">🧪</span> Материал</h3>
-            <select id="materialSelect" class="form-select"></select>
-        </section>
-
-        <!-- Параметры печати -->
-        <section class="print-params-section">
-            <h3><span class="icon">⚙️</span> Параметры печати</h3>
-            <div class="params-grid">
-                <div class="form-group">
-                    <label>⏱️ Время печати</label>
-                    <div class="time-inputs-grid">
-                        <div class="input-with-unit">
-                            <input type="number" id="printHours" class="form-input" min="0" value="0">
-                            <span class="input-unit">часов</span>
-                        </div>
-                        <div class="input-with-unit">
-                            <input type="number" id="printMinutes" class="form-input" min="0" max="59" value="0">
-                            <span class="input-unit">минут</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала</label>
-                    <div class="input-with-unit">
-                        <input type="number" id="materialAmount" class="form-input" min="0" value="0">
-                        <span class="input-unit" id="materialUnit">грамм</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Тираж -->
-        <section class="quantity-section">
-            <h3><span class="icon">📦</span> Тираж</h3>
-            <div class="quantity-input-wrapper">
-                <span class="quantity-icon">🔢</span>
-                <div class="input-with-unit" style="flex: 1;">
-                    <input type="number" id="quantity" class="form-input" min="1" value="1">
-                    <span class="input-unit">штук</span>
-                </div>
-            </div>
-            <p style="margin-top: 12px; color: var(--gray-600); font-size: 0.9rem;">
-                💡 При увеличении тиража действуют скидки до <b id="maxDiscount">0</b>%
-            </p>
-        </section>
-
-        <!-- Итоговая стоимость -->
-        <section class="total-section">
-            <div class="total-card">
-                <h3>💰 Итоговая стоимость</h3>
-                <div class="total-price" id="totalPrice">0.00 ₽</div>
-                <div class="discount-info" id="discountInfo" style="display: none;">
-                    <span class="original-price" id="originalPrice">0.00 ₽</span>
-                    <span class="saved-amount" id="savedAmount">Экономия 0.00 ₽</span>
-                </div>
-                <div class="discount-badge hidden" id="discountBadge">
-                    <span class="icon">🎉</span>
-                    <span id="discountPercent">0</span>% скидка за тираж
-                </div>
-            </div>
-        </section>
-
-        <!-- Загрузка файла (опционально) -->
+        <!-- 1. Загрузка модели -->
         <section class="upload-section">
-            <h3><span class="icon">📁</span> 3D Модель <span class="optional-badge">опционально</span></h3>
+            <h3><span class="icon">📁</span> Загрузка 3D модели</h3>
             <div class="upload-area" id="uploadArea">
                 <span class="upload-icon">📦</span>
                 <p>Перетащите файл сюда или нажмите для выбора</p>
@@ -773,15 +702,19 @@
             <input type="file" id="fileInput" accept=".stl,.obj,.3mf" hidden>
         </section>
 
-        <!-- 3D Просмотрщик -->
+        <!-- 2. 3D Просмотрщик (появляется после загрузки) -->
         <section class="viewer-section" id="viewerSection" style="display: none;">
             <h3><span class="icon">👁️</span> Просмотр модели</h3>
             <div class="viewer-container">
                 <div id="canvas-container"></div>
+                <div class="viewer-controls">
+                    <span>🖱️ ЛКМ - вращение</span>
+                    <span>🔍 Колесо - зум</span>
+                </div>
             </div>
         </section>
 
-        <!-- Параметры модели -->
+        <!-- 3. Информация о модели (появляется после загрузки) -->
         <section class="model-info-section" id="modelInfoSection" style="display: none;">
             <h3><span class="icon">📊</span> Информация о модели</h3>
             <div class="info-grid">
@@ -808,6 +741,97 @@
                 </div>
             </div>
         </section>
+
+        <!-- 4. Выбор типа печати -->
+        <section class="print-type-section">
+            <h3><span class="icon">🔧</span> Тип печати</h3>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="printType" value="fdm" checked>
+                    <span class="radio-custom"></span>
+                    FDM печать
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="printType" value="resin">
+                    <span class="radio-custom"></span>
+                    Фотополимерная
+                </label>
+            </div>
+        </section>
+
+        <!-- 5. Выбор материала -->
+        <section class="material-section">
+            <h3><span class="icon">🧪</span> Материал</h3>
+            <select id="materialSelect" class="form-select"></select>
+        </section>
+
+        <!-- 6. Параметры печати -->
+        <section class="print-params-section">
+            <h3><span class="icon">⚙️</span> Параметры печати</h3>
+            <div class="params-grid">
+                <div class="form-group">
+                    <label>⏱️ Время печати</label>
+                    <div class="time-inputs-grid">
+                        <div class="input-with-unit">
+                            <input type="number" id="printHours" class="form-input" min="0" value="0">
+                            <span class="input-unit">часов</span>
+                        </div>
+                        <div class="input-with-unit">
+                            <input type="number" id="printMinutes" class="form-input" min="0" max="59" value="0">
+                            <span class="input-unit">минут</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="materialAmount" class="form-input" min="0" value="0">
+                        <span class="input-unit" id="materialUnit">грамм</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Тираж -->
+        <section class="quantity-section">
+            <h3><span class="icon">📦</span> Тираж</h3>
+            <div class="quantity-input-wrapper">
+                <span class="quantity-icon">🔢</span>
+                <div class="input-with-unit" style="flex: 1;">
+                    <input type="number" id="quantity" class="form-input" min="1" value="1">
+                    <span class="input-unit">штук</span>
+                </div>
+            </div>
+            <div class="discount-display" id="discountDisplay">
+                <span class="icon">🎉</span>
+                <span id="discountText">Скидка 0%</span>
+            </div>
+        </section>
+
+        <!-- 8. Итоговая стоимость -->
+        <section class="total-section">
+            <div class="total-card">
+                <h3>💰 Итоговая стоимость</h3>
+                <div class="total-price" id="totalPrice">0.00 ₽</div>
+                <div class="discount-note" id="discountNote">
+                    <div>Цена с учётом скидки <span class="percent" id="discountPercentNote">0</span>%</div>
+                    <div class="saved-info">
+                        <span class="original" id="originalPrice">0.00 ₽</span>
+                        <span class="amount" id="savedAmount">Экономия 0.00 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Минимальная стоимость заказа -->
+        <section class="minimum-order-section" id="minimumOrderSection">
+            <h3><span class="icon">⚠️</span> Минимальный заказ</h3>
+            <div class="minimum-order-info">
+                <span class="icon">📋</span>
+                <span>Минимальная стоимость заказа:</span>
+                <span class="amount" id="minimumOrderAmount">0 ₽</span>
+            </div>
+        </section>
     </div>
 
     <script type="module">
@@ -821,8 +845,14 @@
         let config = null;
 
         // === 3D СЦЕНА ===
-        let scene, camera, renderer, controls, model, boxHelper;
+        let scene = null;
+        let camera = null;
+        let renderer = null;
+        let controls = null;
+        let model = null;
+        let boxHelper = null;
         let viewerInitialized = false;
+        let animationId = null;
 
         // === ИНИЦИАЛИЗАЦИЯ ===
         async function init() {
@@ -837,12 +867,6 @@
             try {
                 const response = await fetch('config/pricing.json');
                 config = await response.json();
-                
-                // Обновляем максимальную скидку в интерфейсе
-                if (config.discountTiers && config.discountTiers.length > 0) {
-                    const maxDiscount = Math.max(...config.discountTiers.map(t => t.discount));
-                    document.getElementById('maxDiscount').textContent = maxDiscount;
-                }
             } catch (error) {
                 console.error('Ошибка загрузки конфигурации:', error);
                 alert('Не удалось загрузить конфигурацию цен. Проверьте файл pricing.json');
@@ -854,10 +878,13 @@
             if (viewerInitialized) return;
             
             const container = document.getElementById('canvas-container');
+            if (!container) return;
             
+            // Создаём сцену
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xf8f9fa);
+            scene.background = new THREE.Color(0xf0f2f5);
 
+            // Камера
             camera = new THREE.PerspectiveCamera(
                 45,
                 container.clientWidth / container.clientHeight,
@@ -866,40 +893,70 @@
             );
             camera.position.set(200, 200, 200);
 
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            // Рендерер
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true
+            });
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            
+            // Очищаем контейнер и добавляем canvas
+            container.innerHTML = '';
             container.appendChild(renderer.domElement);
 
+            // Контролы
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
+            controls.screenSpacePanning = false;
+            controls.minDistance = 10;
+            controls.maxDistance = 1000;
 
+            // Свет
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambientLight);
 
             const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
             directionalLight.position.set(100, 100, 100);
+            directionalLight.castShadow = true;
             scene.add(directionalLight);
 
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
+            directionalLight2.position.set(-100, -100, -100);
+            scene.add(directionalLight2);
+
+            // Сетка
             const gridHelper = new THREE.GridHelper(500, 50, 0xcccccc, 0xe0e0e0);
             scene.add(gridHelper);
 
+            // Оси координат
+            const axesHelper = new THREE.AxesHelper(100);
+            scene.add(axesHelper);
+
+            // Запускаем анимацию
             animate();
+            
+            // Ресайз
             window.addEventListener('resize', onWindowResize);
             
             viewerInitialized = true;
+            console.log('3D Viewer initialized');
         }
 
         function animate() {
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
             if (controls) controls.update();
-            if (renderer && scene && camera) renderer.render(scene, camera);
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
         }
 
         function onWindowResize() {
             const container = document.getElementById('canvas-container');
             if (!container || !camera || !renderer) return;
+            
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
@@ -955,49 +1012,104 @@
             const extension = file.name.split('.').pop().toLowerCase();
             const reader = new FileReader();
 
+            console.log('Loading model:', file.name, 'Extension:', extension);
+
             reader.onload = (e) => {
                 const contents = e.target.result;
                 
+                // Инициализируем 3D просмотрщик
                 init3DViewer();
 
-                if (model) scene.remove(model);
-                if (boxHelper) scene.remove(boxHelper);
-
-                let loader;
-                switch (extension) {
-                    case 'stl':
-                        loader = new STLLoader();
-                        const geometry = loader.parse(contents);
-                        model = new THREE.Mesh(
-                            geometry,
-                            new THREE.MeshPhongMaterial({ color: 0x3498db, specular: 0x111111, shininess: 200 })
-                        );
-                        break;
-                    case 'obj':
-                        loader = new OBJLoader();
-                        model = loader.parse(contents);
-                        break;
-                    case '3mf':
-                        loader = new ThreeMFLoader();
-                        model = loader.parse(contents);
-                        break;
-                    default:
-                        alert('Неподдерживаемый формат файла');
-                        return;
+                // Удаляем старую модель
+                if (model) {
+                    scene.remove(model);
+                    if (model.geometry) model.geometry.dispose();
+                    if (model.material) model.material.dispose();
+                    model = null;
+                }
+                if (boxHelper) {
+                    scene.remove(boxHelper);
+                    boxHelper = null;
                 }
 
-                model.castShadow = true;
-                model.receiveShadow = true;
-                scene.add(model);
+                let loader;
+                try {
+                    switch (extension) {
+                        case 'stl':
+                            loader = new STLLoader();
+                            const geometry = loader.parse(contents);
+                            geometry.center();
+                            model = new THREE.Mesh(
+                                geometry,
+                                new THREE.MeshPhongMaterial({ 
+                                    color: 0x339af0, 
+                                    specular: 0x111111, 
+                                    shininess: 200,
+                                    side: THREE.DoubleSide
+                                })
+                            );
+                            model.castShadow = true;
+                            model.receiveShadow = true;
+                            break;
+                        case 'obj':
+                            loader = new OBJLoader();
+                            model = loader.parse(contents);
+                            model.traverse((child) => {
+                                if (child.isMesh) {
+                                    child.material = new THREE.MeshPhongMaterial({ 
+                                        color: 0x339af0,
+                                        side: THREE.DoubleSide
+                                    });
+                                    child.castShadow = true;
+                                    child.receiveShadow = true;
+                                }
+                            });
+                            break;
+                        case '3mf':
+                            loader = new ThreeMFLoader();
+                            model = loader.parse(contents);
+                            model.traverse((child) => {
+                                if (child.isMesh) {
+                                    child.material = new THREE.MeshPhongMaterial({ 
+                                        color: 0x339af0,
+                                        side: THREE.DoubleSide
+                                    });
+                                    child.castShadow = true;
+                                    child.receiveShadow = true;
+                                }
+                            });
+                            break;
+                        default:
+                            alert('Неподдерживаемый формат файла. Используйте STL, OBJ или 3MF');
+                            return;
+                    }
 
-                boxHelper = new THREE.BoxHelper(model, 0xff0000);
-                scene.add(boxHelper);
+                    scene.add(model);
 
-                centerAndFitModel();
-                showModelInfo();
+                    // Добавляем ограничивающий параллелепипед
+                    boxHelper = new THREE.BoxHelper(model, 0xff6b6b);
+                    scene.add(boxHelper);
 
-                document.getElementById('viewerSection').style.display = 'block';
-                document.getElementById('modelInfoSection').style.display = 'block';
+                    // Центрируем и подгоняем камеру
+                    centerAndFitModel();
+                    
+                    // Показываем информацию
+                    showModelInfo();
+
+                    // Показываем секции
+                    document.getElementById('viewerSection').style.display = 'block';
+                    document.getElementById('modelInfoSection').style.display = 'block';
+
+                    console.log('Model loaded successfully');
+                } catch (error) {
+                    console.error('Error loading model:', error);
+                    alert('Ошибка загрузки модели. Проверьте файл и попробуйте снова.');
+                }
+            };
+
+            reader.onerror = () => {
+                console.error('File read error');
+                alert('Ошибка чтения файла');
             };
 
             if (extension === 'stl') {
@@ -1014,19 +1126,23 @@
             const center = box.getCenter(new THREE.Vector3());
             const size = box.getSize(new THREE.Vector3());
 
+            // Центрируем модель
             model.position.sub(center);
 
+            // Подгоняем камеру
             const maxDim = Math.max(size.x, size.y, size.z);
             const fitHeightDistance = maxDim / (2 * Math.atan(Math.PI * camera.fov / 360));
             const fitWidthDistance = fitHeightDistance / camera.aspect;
-            const distance = 1.2 * Math.max(fitHeightDistance, fitWidthDistance);
+            const distance = 1.5 * Math.max(fitHeightDistance, fitWidthDistance);
 
-            camera.position.set(distance, distance, distance);
+            camera.position.set(distance, distance * 0.8, distance);
             camera.lookAt(0, 0, 0);
             if (controls) controls.update();
         }
 
         function showModelInfo() {
+            if (!model) return;
+            
             const box = new THREE.Box3().setFromObject(model);
             const size = box.getSize(new THREE.Vector3());
 
@@ -1060,7 +1176,7 @@
             const element = document.getElementById(elementId);
             const icon = element.querySelector('.status-icon');
             
-            element.classList.remove('compatible', 'incompatible', 'disabled');
+            element.classList.remove('compatible', 'incompatible');
             
             if (compatible) {
                 element.classList.add('compatible');
@@ -1109,14 +1225,10 @@
             
             let discount = 0;
             for (const tier of config.discountTiers) {
-                if (quantity >= tier.min && quantity <= tier.max) {
-                    discount = tier.discount;
-                    break;
-                }
-                // Для последнего диапазона (без верхнего предела)
-                if (tier.min && !tier.max && quantity >= tier.min) {
-                    discount = tier.discount;
-                    break;
+                if (quantity >= tier.min) {
+                    if (!tier.max || quantity <= tier.max) {
+                        discount = tier.discount;
+                    }
                 }
             }
             return discount;
@@ -1154,24 +1266,41 @@
             // Получаем скидку по тиражу
             const discountPercent = getDiscountByQuantity(quantity);
             const discountAmount = totalBeforeDiscount * (discountPercent / 100);
-            const totalAfterDiscount = totalBeforeDiscount - discountAmount;
+            let totalAfterDiscount = totalBeforeDiscount - discountAmount;
+
+            // Проверяем минимальную стоимость заказа
+            const minimumOrder = printType === 'fdm' 
+                ? config.minimumOrder.fdm 
+                : config.minimumOrder.resin;
+
+            const minimumOrderSection = document.getElementById('minimumOrderSection');
+            
+            if (totalAfterDiscount < minimumOrder) {
+                totalAfterDiscount = minimumOrder;
+                minimumOrderSection.classList.add('visible');
+                document.getElementById('minimumOrderAmount').textContent = minimumOrder.toFixed(2) + ' ₽';
+            } else {
+                minimumOrderSection.classList.remove('visible');
+            }
 
             // Обновляем интерфейс
             document.getElementById('totalPrice').textContent = totalAfterDiscount.toFixed(2) + ' ₽';
 
             // Показываем информацию о скидке
-            const discountBadge = document.getElementById('discountBadge');
-            const discountInfo = document.getElementById('discountInfo');
+            const discountDisplay = document.getElementById('discountDisplay');
+            const discountNote = document.getElementById('discountNote');
             
             if (discountPercent > 0) {
-                discountBadge.classList.remove('hidden');
-                document.getElementById('discountPercent').textContent = discountPercent;
-                discountInfo.style.display = 'block';
+                discountDisplay.classList.add('visible');
+                document.getElementById('discountText').textContent = `Скидка ${discountPercent}% за тираж`;
+                
+                discountNote.classList.add('visible');
+                document.getElementById('discountPercentNote').textContent = discountPercent;
                 document.getElementById('originalPrice').textContent = totalBeforeDiscount.toFixed(2) + ' ₽';
                 document.getElementById('savedAmount').textContent = `Экономия ${discountAmount.toFixed(2)} ₽`;
             } else {
-                discountBadge.classList.add('hidden');
-                discountInfo.style.display = 'none';
+                discountDisplay.classList.remove('visible');
+                discountNote.classList.remove('visible');
             }
         }
 
