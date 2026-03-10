@@ -38,7 +38,7 @@
       "powerConsumption": { "fdmWatts": 700, "resinWatts": 250 },
       "electricityPricePerKwh": 6,
       "amortization": { "fdmHourlyRate": 50, "resinHourlyRate": 150 },
-      "fixedMonthlyCosts": { "lease": 70000, "other": 10000 },
+      "fixedMonthlyCosts": { "lease": 700000, "other": 10000 },
       "consumables": { "fdmPerHour": 20, "resinPerHour": 50 },
       "operatorMarkupPercent": { "fdm": 30, "resin": 45 }
     }
