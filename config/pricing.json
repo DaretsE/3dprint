@@ -26,21 +26,21 @@
       },
       "resin": {
         "basic": { "name": "Базовая смола", "pricePerLiter": 2500 },
-        "improved": { "name": "Улучшенная смола", "pricePerLiter": 7500 },
+        "improved": { "name": "Улучшенная смола", "pricePerLiter": 5000 },
         "constructive": { "name": "Конструкторская смола", "pricePerLiter": 12000 }
       }
     },
     "timeBasedCosts": {
       "fdmPrinter": { "costPerMinute": 0.5 },
-      "resinPrinter": { "costPerMinute": 1.2 }
+      "resinPrinter": { "costPerMinute": 1.5 }
     },
     "operatingExpenses": {
       "powerConsumption": { "fdmWatts": 700, "resinWatts": 250 },
       "electricityPricePerKwh": 6,
-      "amortization": { "fdmHourlyRate": 50, "resinHourlyRate": 150 },
+      "amortization": { "fdmHourlyRate": 50, "resinHourlyRate": 200 },
       "fixedMonthlyCosts": { "lease": 70000, "other": 10000 },
-      "consumables": { "fdmPerHour": 20, "resinPerHour": 50 },
-      "operatorMarkupPercent": { "fdm": 30, "resin": 45 }
+      "consumables": { "fdmPerHour": 20, "resinPerHour": 70 },
+      "operatorMarkupPercent": { "fdm": 30, "resin": 50 }
     }
   }
 }
