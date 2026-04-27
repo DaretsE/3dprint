@@ -22,7 +22,7 @@
       "plastic": {
         "pla": { "name": "PLA", "pricePerKg": 2200 },
         "petg": { "name": "PET-G", "pricePerKg": 2300 },
-        "abs": { "name": "ABS", "pricePerKg": 2400 }
+        "abs": { "name": "ABS", "pricePerKg": 1700 }
       },
       "resin": {
         "basic": { "name": "Базовая смола", "pricePerLiter": 2500 },
