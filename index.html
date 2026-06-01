@@ -1298,6 +1298,7 @@
                 unitLabel.textContent = 'грамм';
                 const materials = config.costComponents.materials.plastic;
                 for (const [key, value] of Object.entries(materials)) {
+                    if (value.hidden === 1) continue;
                     const option = document.createElement('option');
                     option.value = key;
                     option.textContent = value.name;
@@ -1307,6 +1308,7 @@
                 unitLabel.textContent = 'мл';
                 const materials = config.costComponents.materials.resin;
                 for (const [key, value] of Object.entries(materials)) {
+                    if (value.hidden === 1) continue;
                     const option = document.createElement('option');
                     option.value = key;
                     option.textContent = value.name;
