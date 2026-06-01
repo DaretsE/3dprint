@@ -26,13 +26,13 @@
   "costComponents": {
     "materials": {
       "plastic": {
-        "pla":  { "name": "PLA",    "pricePerKg": 2200, "hidden": 0 },
-        "petg": { "name": "PET-G",  "pricePerKg": 2300, "hidden": 0 },
-        "abs":  { "name": "ABS",    "pricePerKg": 1700, "hidden": 0 }
+        "pla":  { "name": "PLA",    "pricePerKg": 2500, "hidden": 0 },
+        "petg": { "name": "PET-G",  "pricePerKg": 2500, "hidden": 0 },
+        "abs":  { "name": "ABS",    "pricePerKg": 2500, "hidden": 0 }
       },
       "resin": {
-        "basic":        { "name": "Базовая смола",       "pricePerLiter": 2500,  "hidden": 0 },
-        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 0 },
+        "basic":        { "name": "Базовая смола",       "pricePerLiter": 3000,  "hidden": 0 },
+        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 1 },
         "constructive": { "name": "Конструкторская смола","pricePerLiter": 12000, "hidden": 0 }
       }
     },
