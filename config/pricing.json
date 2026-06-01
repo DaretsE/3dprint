@@ -46,7 +46,7 @@
       "amortization": { "fdmHourlyRate": 50, "resinHourlyRate": 200 },
       "fixedMonthlyCosts": { "lease": 70000, "other": 10000 },
       "consumables": { "fdmPerHour": 20, "resinPerHour": 70 },
-      "operatorMarkupPercent": { "fdm": 30, "resin": 50 }
+      "operatorMarkupPercent": { "fdm": 35, "resin": 60 }
     }
   }
 }
