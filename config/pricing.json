@@ -32,8 +32,8 @@
       },
       "resin": {
         "basic":        { "name": "Базовая смола",       "pricePerLiter": 3000,  "hidden": 0 },
-        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 1 },
-        "constructive": { "name": "Конструкторская смола","pricePerLiter": 12000, "hidden": 0 }
+        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 10000,  "hidden": 0 },
+        "constructive": { "name": "Конструкторская цветная","pricePerLiter": 14000, "hidden": 0 }
       }
     },
     "timeBasedCosts": {
