@@ -796,7 +796,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала</label>
+                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала<span id="materialOverheadHint" style="display:none; color: var(--gray-500); font-weight: 400; font-size: 0.88rem;"></span></label>
                     <div class="input-with-unit">
                         <input type="number" id="materialAmount" class="form-input" min="0" value="0">
                         <span class="input-unit" id="materialUnit">грамм</span>
@@ -1314,6 +1314,7 @@
                 }
             }
 
+            updateMaterialLabel();
             calculateTotal();
         }
 
@@ -1412,18 +1413,43 @@
             }
         }
 
+        // === МЕТКА ПОЛЯ РАСХОДА МАТЕРИАЛА ===
+        function updateMaterialLabel() {
+            if (!config) return;
+            const printType = document.querySelector('input[name="printType"]:checked').value;
+            const overhead = config.materialOverhead || {};
+            const showHint = overhead.showInInterface === 1;
+            const percent = printType === 'fdm'
+                ? (overhead.fdmPercent || 0)
+                : (overhead.resinPercent || 0);
+
+            const hint = document.getElementById('materialOverheadHint');
+            if (showHint && percent > 0) {
+                hint.textContent = ` (+${percent}%)`;
+                hint.style.display = 'inline';
+            } else {
+                hint.style.display = 'none';
+            }
+        }
+
         function calculateMaterialCost(printType, material, amount) {
-            const materials = printType === 'fdm' 
-                ? config.costComponents.materials.plastic 
+            const overhead = config.materialOverhead || {};
+            const overheadPercent = printType === 'fdm'
+                ? (overhead.fdmPercent || 0)
+                : (overhead.resinPercent || 0);
+            const adjustedAmount = amount * (1 + overheadPercent / 100);
+
+            const materials = printType === 'fdm'
+                ? config.costComponents.materials.plastic
                 : config.costComponents.materials.resin;
 
             const materialData = materials[material];
             if (!materialData) return 0;
 
             if (printType === 'fdm') {
-                return (amount / 1000) * materialData.pricePerKg;
+                return (adjustedAmount / 1000) * materialData.pricePerKg;
             } else {
-                return (amount / 1000) * materialData.pricePerLiter;
+                return (adjustedAmount / 1000) * materialData.pricePerLiter;
             }
         }
 
