@@ -5,7 +5,7 @@
   },
   "materialOverhead": {
     "fdmPercent": 0,
-    "resinPercent": 50,
+    "resinPercent": 0,
     "showInInterface": 0
   },
   "printerFleet": {
@@ -25,14 +25,14 @@
   "costComponents": {
     "materials": {
       "plastic": {
-        "pla": { "name": "PLA", "pricePerKg": 2200 },
-        "petg": { "name": "PET-G", "pricePerKg": 2300 },
-        "abs": { "name": "ABS", "pricePerKg": 1700 }
+        "pla":  { "name": "PLA",    "pricePerKg": 2200, "hidden": 0 },
+        "petg": { "name": "PET-G",  "pricePerKg": 2300, "hidden": 0 },
+        "abs":  { "name": "ABS",    "pricePerKg": 1700, "hidden": 0 }
       },
       "resin": {
-        "basic": { "name": "Базовая смола", "pricePerLiter": 2500 },
-        "improved": { "name": "Улучшенная смола", "pricePerLiter": 5000 },
-        "constructive": { "name": "Конструкторская смола", "pricePerLiter": 12000 }
+        "basic":        { "name": "Базовая смола",       "pricePerLiter": 2500,  "hidden": 0 },
+        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 0 },
+        "constructive": { "name": "Конструкторская смола","pricePerLiter": 12000, "hidden": 0 }
       }
     },
     "timeBasedCosts": {
