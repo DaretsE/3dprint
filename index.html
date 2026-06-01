@@ -746,8 +746,8 @@
         <header>
             <div class="header-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
             <div class="header-text">
-                <h1>BQD <span>КАЛЬКУЛЯТОР 3D ПЕЧАТИ</span></h1>
-                <p class="subtitle">Стоимость FDM и Фотополимерной 3d-печати</p>
+                <h1>3D <span>PRINT</span></h1>
+                <p class="subtitle">Cost Calculator</p>
             </div>
         </header>
 
@@ -1463,14 +1463,14 @@
             const discountAmount      = totalBeforeDiscount * (discountPercent / 100);
             const totalAfterDiscount  = totalBeforeDiscount - discountAmount;
 
-            totalPriceEl.textContent = totalAfterDiscount.toFixed(2) + ' ₽';
+            totalPriceEl.textContent = Math.ceil(totalAfterDiscount) + ' ₽';
 
             // ── Сводка ──────────────────────────────────────────
             const pricePerItem = totalAfterDiscount / totalItems;
 
             document.getElementById('summaryTables').textContent        = tableCount + ' шт.';
             document.getElementById('summaryItemsPerTable').textContent = itemsPerTable + ' шт.';
-            document.getElementById('summaryPricePerItem').textContent  = pricePerItem.toFixed(2) + ' ₽';
+            document.getElementById('summaryPricePerItem').textContent  = Math.ceil(pricePerItem) + ' ₽';
 
             const totalItemsRow = document.getElementById('summaryTotalItemsRow');
             if (tableCount > 1) {
@@ -1486,8 +1486,8 @@
                 discountBlock.style.display = 'block';
                 document.getElementById('summaryDiscountLabel').textContent   = `Скидка за тираж (${totalItems} шт.)`;
                 document.getElementById('summaryDiscountPercent').textContent = `−${discountPercent}%`;
-                document.getElementById('summaryOriginalPrice').textContent   = totalBeforeDiscount.toFixed(2) + ' ₽';
-                document.getElementById('summarySaving').textContent          = discountAmount.toFixed(2) + ' ₽';
+                document.getElementById('summaryOriginalPrice').textContent   = Math.ceil(totalBeforeDiscount) + ' ₽';
+                document.getElementById('summarySaving').textContent          = Math.ceil(discountAmount) + ' ₽';
             } else {
                 discountBlock.style.display = 'none';
             }
@@ -1499,7 +1499,7 @@
 
             if (totalAfterDiscount < minimumOrder) {
                 minimumOrderSection.classList.add('visible');
-                document.getElementById('minimumOrderAmount').textContent = minimumOrder.toFixed(2) + ' ₽';
+                document.getElementById('minimumOrderAmount').textContent = Math.ceil(minimumOrder) + ' ₽';
             } else {
                 minimumOrderSection.classList.remove('visible');
             }
