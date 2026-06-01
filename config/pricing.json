@@ -5,8 +5,8 @@
   },
   "materialOverhead": {
     "fdmPercent": 0,
-    "resinPercent": 0,
-    "showInInterface": 1
+    "resinPercent": 50,
+    "showInInterface": 0
   },
   "printerFleet": {
     "fdmPrinterCount": 5,
