@@ -5,7 +5,7 @@
   },
   "materialOverhead": {
     "fdmPercent": 0,
-    "resinPercent": 50,
+    "resinPercent": 0,
     "showInInterface": 0
   },
   "printerFleet": {
@@ -16,11 +16,12 @@
     "fdm": 800,
     "resin": 1000
   },
+  "discountsEnabled": 1,
   "discountTiers": [
-    { "min": 1, "max": 19, "discount": 0 },
-    { "min": 20, "max": 49, "discount": 3 },
-    { "min": 50, "max": 99, "discount": 5 },
-    { "min": 100, "discount": 8 }
+    { "min": 2, "max": 10, "discount": 2 },
+    { "min": 11, "max": 50, "discount": 5 },
+    { "min": 51, "max": 99, "discount": 10 },
+    { "min": 100, "discount": 15 }
   ],
   "costComponents": {
     "materials": {
@@ -30,8 +31,8 @@
         "abs":  { "name": "ABS",    "pricePerKg": 1700, "hidden": 0 }
       },
       "resin": {
-        "basic":        { "name": "Базовая смола",       "pricePerLiter": 2600,  "hidden": 0 },
-        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 1 },
+        "basic":        { "name": "Базовая смола",       "pricePerLiter": 2500,  "hidden": 0 },
+        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 0 },
         "constructive": { "name": "Конструкторская смола","pricePerLiter": 12000, "hidden": 0 }
       }
     },
