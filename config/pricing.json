@@ -3,6 +3,11 @@
     "defaultCurrency": "₽",
     "decimalPlaces": 2
   },
+  "materialOverhead": {
+    "fdmPercent": 0,
+    "resinPercent": 0,
+    "showInInterface": 0
+  },
   "printerFleet": {
     "fdmPrinterCount": 5,
     "targetDailyOperatingHours": 20
