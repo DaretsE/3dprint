@@ -560,43 +560,6 @@
             color: var(--text-muted);
         }
 
-        /* ─── НОТА СО СКИДКОЙ ─── */
-        .discount-note {
-            margin-top: 16px;
-            padding: 12px 16px;
-            background: rgba(0, 212, 200, 0.07);
-            border-radius: var(--radius-md);
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            display: none;
-            border: 1px solid rgba(0, 212, 200, 0.2);
-        }
-
-        .discount-note.visible { display: block; }
-
-        .discount-note .percent {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .saved-info {
-            margin-top: 8px;
-            font-size: 0.83rem;
-            opacity: 0.85;
-        }
-
-        .saved-info .original {
-            text-decoration: line-through;
-            opacity: 0.5;
-            margin-right: 10px;
-        }
-
-        .saved-info .amount {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
         /* ─── МИНИМАЛЬНЫЙ ЗАКАЗ ─── */
         .minimum-order-section {
             background: rgba(255, 107, 107, 0.07);
@@ -905,11 +868,7 @@
                 <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> Итоговая стоимость заказа</h3>
                 <div class="total-placeholder" id="totalPlaceholder">Введите время и расход материала</div>
                 <div class="total-price" id="totalPrice" style="display: none;">0.00 ₽</div>
-                <div class="saved-info">
-                        <span class="original" id="originalPrice">0.00 ₽</span>
-                        <span class="amount" id="savedAmount">Экономия 0.00 ₽</span>
-                    </div>
-                </div>
+
                 <div class="order-summary" id="orderSummary" style="display:none;">
                     <div class="summary-row">
                         <span class="summary-label">Столов в расчёте</span>
@@ -1434,6 +1393,7 @@
         // === ПОЛУЧЕНИЕ СКИДКИ ПО ТИРАЖУ ===
         function getDiscountByQuantity(quantity) {
             if (!config || !config.discountTiers) return 0;
+            if (config.discountsEnabled === 0) return 0;
             
             let discount = 0;
             for (const tier of config.discountTiers) {
