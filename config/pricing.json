@@ -16,7 +16,7 @@
     "fdm": 800,
     "resin": 1000
   },
-  "discountsEnabled": 1,
+  "discountsEnabled": 0,
   "discountTiers": [
     { "min": 2, "max": 10, "discount": 2 },
     { "min": 11, "max": 50, "discount": 5 },
