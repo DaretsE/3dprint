@@ -5,7 +5,7 @@
   },
   "materialOverhead": {
     "fdmPercent": 0,
-    "resinPercent": 0,
+    "resinPercent": 50,
     "showInInterface": 0
   },
   "printerFleet": {
@@ -30,8 +30,8 @@
         "abs":  { "name": "ABS",    "pricePerKg": 1700, "hidden": 0 }
       },
       "resin": {
-        "basic":        { "name": "Базовая смола",       "pricePerLiter": 2500,  "hidden": 0 },
-        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 0 },
+        "basic":        { "name": "Базовая смола",       "pricePerLiter": 2600,  "hidden": 0 },
+        "improved":     { "name": "Улучшенная смола",    "pricePerLiter": 5000,  "hidden": 1 },
         "constructive": { "name": "Конструкторская смола","pricePerLiter": 12000, "hidden": 0 }
       }
     },
