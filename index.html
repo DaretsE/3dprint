@@ -7,170 +7,186 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gray-50: #f8f9fa;
-            --gray-100: #f1f3f5;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-400: #ced4da;
-            --gray-500: #adb5bd;
-            --gray-600: #868e96;
-            --gray-700: #495057;
-            --gray-800: #343a40;
-            --gray-900: #212529;
-            
-            --blue-50: #e7f5ff;
-            --blue-100: #d0ebff;
-            --blue-200: #a5d8ff;
-            --blue-300: #74c0fc;
-            --blue-400: #4dabf7;
-            --blue-500: #339af0;
-            --blue-600: #228be6;
-            --blue-700: #1c7ed6;
-            --blue-800: #1971c2;
-            --blue-900: #1864ab;
-            
-            --orange-50: #fff4e6;
-            --orange-100: #ffe8cc;
-            --orange-200: #ffd8a8;
-            --orange-300: #ffc078;
-            --orange-400: #ffa94d;
-            --orange-500: #ff922b;
-            --orange-600: #fd7e14;
-            --orange-700: #f76707;
-            --orange-800: #e8590c;
-            --orange-900: #d9480f;
-            
-            --green-50: #ebfbee;
-            --green-100: #d3f9d8;
-            --green-500: #40c057;
-            --green-600: #37b24d;
-            --green-700: #2b8a3e;
-            
-            --success-bg: #ebfbee;
-            --success-text: #2b8a3e;
-            --error-bg: #fff5f5;
-            --error-text: #c92a2a;
-            
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-            --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.16);
-            
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
+            --bg-base:        #0d1017;
+            --bg-card:        #151922;
+            --bg-section:     #1a1f2e;
+            --bg-input:       #1e2433;
+            --bg-input-hover: #242b3d;
+            --border:         #2a3148;
+            --border-focus:   #00d4c8;
+
+            --accent:         #00d4c8;
+            --accent-dim:     rgba(0, 212, 200, 0.12);
+            --accent-glow:    0 0 20px rgba(0, 212, 200, 0.25);
+            --accent-dark:    #00a89e;
+
+            --text-primary:   #ffffff;
+            --text-secondary: #8b95b0;
+            --text-muted:     #505a72;
+
+            --success-bg:     rgba(0, 212, 200, 0.1);
+            --success-text:   #00d4c8;
+            --error-bg:       rgba(255, 90, 90, 0.1);
+            --error-text:     #ff6b6b;
+
+            --shadow-card:    0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg:      0 8px 40px rgba(0, 0, 0, 0.5);
+            --shadow-accent:  0 4px 20px rgba(0, 212, 200, 0.2);
+
+            --radius-sm:  8px;
+            --radius-md:  12px;
+            --radius-lg:  16px;
+            --radius-xl:  24px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--blue-50) 100%);
+            background: var(--bg-base);
             min-height: 100vh;
-            color: var(--gray-800);
+            color: var(--text-primary);
             line-height: 1.6;
-            padding: 20px;
+            padding: 24px 16px 48px;
         }
 
+        /* ─── КОНТЕЙНЕР ─── */
         .container {
-            max-width: 760px;
+            max-width: 780px;
             margin: 0 auto;
         }
 
+        /* ─── ШАПКА ─── */
         header {
-            text-align: center;
-            padding: 40px 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 0 4px 36px;
         }
 
-        header h1 {
-            color: var(--gray-900);
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-dim);
+            border: 1.5px solid var(--accent);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: var(--accent-glow);
+            color: var(--accent);
+        }
+
+        .header-text h1 {
+            font-size: 1.3rem;
             font-weight: 700;
-            font-size: 2.2rem;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+            line-height: 1.2;
         }
 
-        header .subtitle {
-            color: var(--gray-600);
-            font-size: 1rem;
+        .header-text h1 span {
+            color: var(--accent);
+        }
+
+        .header-text .subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
             font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
+        /* ─── СЕКЦИИ ─── */
         section {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: var(--radius-lg);
-            padding: 28px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-        }
-
-        section:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
+            padding: 24px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            animation: fadeUp 0.4s ease-out both;
         }
 
         section h3 {
-            color: var(--gray-800);
-            margin-bottom: 20px;
-            font-size: 1.15rem;
+            color: var(--text-primary);
+            font-size: 0.85rem;
             font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--text-secondary);
         }
 
         section h3 .icon {
-            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        section h3 .icon svg { display: block; }
+
+        /* label icons */
+        .form-group label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+            color: var(--accent);
+            opacity: 0.85;
+            position: relative;
+            top: -1px;
         }
 
+        /* ─── ЗАГРУЗКА МОДЕЛИ ─── */
         .upload-area {
-            border: 2px dashed var(--gray-300);
+            border: 2px dashed var(--border);
             border-radius: var(--radius-md);
-            padding: 50px 25px;
+            padding: 44px 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--blue-50) 100%);
+            transition: all 0.25s ease;
+            background: var(--bg-section);
         }
 
         .upload-area:hover,
         .upload-area.dragover {
-            border-color: var(--blue-500);
-            background: linear-gradient(135deg, var(--blue-50) 0%, var(--blue-100) 100%);
-            transform: scale(1.01);
+            border-color: var(--accent);
+            background: var(--accent-dim);
         }
 
         .upload-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
             display: block;
+            margin: 0 auto 16px;
+            color: var(--accent);
+            opacity: 0.7;
         }
 
         .upload-area p {
-            color: var(--gray-700);
+            color: var(--text-secondary);
             font-weight: 500;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
         }
 
         .supported-formats {
-            color: var(--gray-500);
-            font-size: 0.85rem;
-            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-top: 6px;
+            letter-spacing: 1px;
         }
 
+        /* ─── 3D ПРОСМОТРЩИК ─── */
         .viewer-container {
-            height: 400px;
-            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            height: 380px;
+            background: var(--bg-section);
             border-radius: var(--radius-md);
             overflow: hidden;
-            border: 1px solid var(--gray-300);
+            border: 1px solid var(--border);
             position: relative;
         }
 
@@ -189,73 +205,72 @@
 
         .viewer-controls {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
+            bottom: 12px;
+            right: 12px;
             display: flex;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 8px 12px;
+            background: rgba(13, 16, 23, 0.85);
+            padding: 6px 12px;
             border-radius: var(--radius-sm);
-            font-size: 0.8rem;
-            color: var(--gray-600);
-            box-shadow: var(--shadow-sm);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
             pointer-events: none;
+            backdrop-filter: blur(8px);
         }
 
+        /* ─── ИНФО О МОДЕЛИ ─── */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 12px;
         }
 
         .info-card {
-            background: var(--gray-50);
-            padding: 20px;
+            background: var(--bg-section);
+            padding: 18px;
             border-radius: var(--radius-md);
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--border);
         }
 
         .info-card h3 {
-            font-size: 1rem;
-            margin-bottom: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .info-data {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            color: var(--gray-600);
-            font-size: 0.95rem;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        .info-data b {
-            color: var(--gray-800);
-            font-weight: 600;
-        }
+        .info-data b { color: var(--accent); font-weight: 600; }
 
-        .compatibility-status {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        /* ─── СТАТУСЫ СОВМЕСТИМОСТИ ─── */
+        .compatibility-status { display: flex; flex-direction: column; gap: 8px; }
 
         .status-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #fff;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--bg-input);
             border-radius: var(--radius-sm);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            transition: all 0.25s ease;
         }
 
         .status-item.compatible {
             background: var(--success-bg);
             color: var(--success-text);
-            border-color: var(--success-text);
+            border-color: var(--accent);
         }
 
         .status-item.incompatible {
@@ -265,13 +280,19 @@
         }
 
         .status-icon {
-            font-size: 1.3rem;
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+            color: var(--text-muted);
         }
+        .status-item.compatible   .status-icon { color: var(--accent); }
+        .status-item.incompatible .status-icon { color: var(--error-text); }
 
+        /* ─── RADIO КНОПКИ (тип печати) ─── */
         .radio-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 12px;
         }
 
         .radio-label {
@@ -281,97 +302,105 @@
             gap: 10px;
             cursor: pointer;
             padding: 16px 20px;
-            background: var(--gray-50);
+            background: var(--bg-section);
             border-radius: var(--radius-md);
-            transition: all 0.3s ease;
-            border: 2px solid var(--gray-200);
-            font-weight: 500;
-            color: var(--gray-700);
+            transition: all 0.25s ease;
+            border: 1.5px solid var(--border);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .radio-label:hover {
-            background: var(--blue-50);
-            border-color: var(--blue-300);
+            border-color: var(--accent);
+            color: var(--text-primary);
         }
 
-        .radio-label input[type="radio"] {
-            display: none;
-        }
+        .radio-label input[type="radio"] { display: none; }
 
         .radio-label input[type="radio"]:checked + .radio-custom {
-            background: var(--orange-500);
-            border-color: var(--orange-500);
-            box-shadow: 0 0 0 4px var(--orange-100);
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
         }
 
         .radio-label:has(input:checked) {
-            border-color: var(--orange-500);
-            background: var(--orange-50);
-            color: var(--orange-800);
+            border-color: var(--accent);
+            background: var(--accent-dim);
+            color: var(--accent);
+            box-shadow: var(--accent-glow);
         }
 
         .radio-custom {
-            width: 22px;
-            height: 22px;
-            border: 2px solid var(--gray-400);
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-muted);
             border-radius: 50%;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             position: relative;
+            flex-shrink: 0;
         }
 
         .radio-custom::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
-            background: #fff;
+            width: 8px; height: 8px;
+            background: var(--bg-base);
             border-radius: 50%;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
-        .radio-label:has(input:checked) .radio-custom::after {
-            opacity: 1;
-        }
+        .radio-label:has(input:checked) .radio-custom::after { opacity: 1; }
 
+        /* ─── ИНПУТЫ / СЕЛЕКТЫ ─── */
         .form-select,
         .form-input {
             width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--gray-200);
+            padding: 13px 16px;
+            border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: inherit;
-            transition: all 0.3s ease;
-            background: #fff;
-            color: var(--gray-800);
+            transition: all 0.25s ease;
+            background: var(--bg-input);
+            color: var(--text-primary);
             font-weight: 500;
+        }
+
+        .form-select option {
+            background: var(--bg-section);
+            color: var(--text-primary);
         }
 
         .form-select:hover,
         .form-input:hover {
-            border-color: var(--gray-300);
+            border-color: #3a4460;
+            background: var(--bg-input-hover);
         }
 
         .form-select:focus,
         .form-input:focus {
             outline: none;
-            border-color: var(--blue-500);
-            box-shadow: 0 0 0 4px var(--blue-100);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+            background: var(--bg-input-hover);
         }
 
         .form-select {
             cursor: pointer;
-            background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23868e96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2300d4c8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 45px;
+            background-position: right 14px center;
+            padding-right: 42px;
         }
 
+        /* ─── СЕТКИ ПАРАМЕТРОВ ─── */
         .params-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -381,7 +410,7 @@
         .time-inputs-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .form-group {
@@ -391,62 +420,65 @@
         }
 
         .form-group label {
-            color: var(--gray-700);
+            color: var(--text-secondary);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .input-with-unit {
-            position: relative;
-        }
-
-        .input-with-unit input {
-            padding-right: 70px;
-        }
+        /* ─── ИНПУТ С ЕДИНИЦЕЙ ИЗМЕРЕНИЯ ─── */
+        .input-with-unit { position: relative; }
+        .input-with-unit input { padding-right: 68px; }
 
         .input-unit {
             position: absolute;
-            right: 16px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--gray-500);
-            font-weight: 500;
-            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.8rem;
             pointer-events: none;
+            letter-spacing: 0.3px;
         }
 
+        /* ─── ТИРАЖ ─── */
         .quantity-section {
-            background: linear-gradient(135deg, var(--orange-50) 0%, var(--orange-100) 100%);
-            border-color: var(--orange-200);
-        }
-
-        .quantity-section h3 {
-            color: var(--orange-800);
+            background: var(--bg-card);
+            border-color: var(--border);
         }
 
         .quantity-input-wrapper {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
         }
 
-        .quantity-input-wrapper .form-input {
-            flex: 1;
-        }
-
+        .quantity-input-wrapper .form-input { flex: 1; }
         .quantity-icon {
-            font-size: 1.5rem;
-            color: var(--orange-600);
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+        .discount-display .icon {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
         }
 
+        /* ─── СКИДКА ─── */
         .discount-display {
-            margin-top: 15px;
-            padding: 12px 16px;
-            background: var(--green-50);
-            border: 1px solid var(--green-500);
+            margin-top: 14px;
+            padding: 11px 16px;
+            background: var(--success-bg);
+            border: 1px solid var(--accent);
             border-radius: var(--radius-md);
-            color: var(--green-700);
+            color: var(--accent);
             font-weight: 600;
+            font-size: 0.9rem;
             display: none;
         }
 
@@ -457,16 +489,19 @@
         }
 
         .discount-display .icon {
-            font-size: 1.3rem;
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
         }
 
+        /* ─── ИТОГОВАЯ КАРТОЧКА ─── */
         .total-card {
-            background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-800) 100%);
-            color: white;
-            padding: 35px 30px;
+            background: linear-gradient(135deg, #151e30 0%, #0f1620 100%);
+            border: 1px solid var(--accent);
+            padding: 36px 28px 32px;
             border-radius: var(--radius-lg);
             text-align: center;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-accent), var(--shadow-lg);
             position: relative;
             overflow: hidden;
         }
@@ -474,245 +509,289 @@
         .total-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .total-card::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,212,200,0.06) 0%, transparent 70%);
             pointer-events: none;
         }
 
         .total-card h3 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            opacity: 0.95;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
         .total-price {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
         }
 
         .total-price::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--orange-400);
-            margin: 15px auto 0;
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            margin: 14px auto 0;
             border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent);
         }
 
         .total-placeholder {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            opacity: 0.8;
-            color: var(--blue-200);
+            color: var(--text-muted);
         }
 
+        /* ─── НОТА СО СКИДКОЙ ─── */
         .discount-note {
-            margin-top: 15px;
+            margin-top: 16px;
             padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 212, 200, 0.07);
             border-radius: var(--radius-md);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
             display: none;
+            border: 1px solid rgba(0, 212, 200, 0.2);
         }
 
-        .discount-note.visible {
-            display: block;
-        }
+        .discount-note.visible { display: block; }
 
         .discount-note .percent {
-            color: var(--orange-300);
+            color: var(--accent);
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .saved-info {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            opacity: 0.9;
+            margin-top: 8px;
+            font-size: 0.83rem;
+            opacity: 0.85;
         }
 
         .saved-info .original {
             text-decoration: line-through;
-            opacity: 0.7;
+            opacity: 0.5;
             margin-right: 10px;
         }
 
         .saved-info .amount {
-            color: var(--orange-300);
+            color: var(--accent);
             font-weight: 600;
         }
 
+        /* ─── МИНИМАЛЬНЫЙ ЗАКАЗ ─── */
         .minimum-order-section {
-            background: linear-gradient(135deg, var(--orange-50) 0%, var(--orange-100) 100%);
-            border: 2px solid var(--orange-300);
-            color: var(--orange-800);
+            background: rgba(255, 107, 107, 0.07);
+            border: 1px solid rgba(255, 107, 107, 0.35);
+            color: #ff8585;
             display: none;
-            margin-top: 16px;
+            margin-top: 12px;
             border-radius: var(--radius-lg);
-            padding: 20px;
+            padding: 18px 20px;
         }
 
         .minimum-order-section.visible {
             display: block;
-            animation: fadeInUp 0.5s ease-out;
+            animation: fadeUp 0.4s ease-out;
         }
 
         .minimum-order-section h3 {
-            color: var(--orange-800);
+            color: #ff8585;
             margin-bottom: 10px;
-            font-size: 1rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
         }
 
         .minimum-order-info {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            font-size: 1rem;
+            gap: 10px;
+            font-size: 0.95rem;
             font-weight: 600;
         }
 
         .minimum-order-info .icon {
-            font-size: 1.3rem;
+            display: inline-flex;
+            align-items: center;
+            color: #ff8585;
+        }
+        .minimum-order-info .amount { color: #ff6b6b; font-size: 1.15rem; font-weight: 700; }
+        .minimum-order-info .text { color: #ff8585; }
+
+        /* ─── АНИМАЦИИ ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .minimum-order-info .amount {
-            color: var(--orange-600);
-            font-size: 1.2rem;
-            font-weight: 700;
+        /* ─── СКРОЛЛБАР ─── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3a4460; }
+
+        /* ─── LOADING ─── */
+        .loading-indicator {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
-        .minimum-order-info .text {
-            color: var(--orange-700);
+        .loading-spinner {
+            width: 36px; height: 36px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 10px;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        section {
-            animation: fadeInUp 0.5s ease-out;
-        }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-400);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-500);
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 12px;
-            }
-
-            header h1 {
-                font-size: 1.7rem;
-            }
-
-            section {
-                padding: 22px;
-            }
-
-            .info-grid,
-            .params-grid,
-            .time-inputs-grid,
-            .radio-group {
-                grid-template-columns: 1fr;
-            }
-
-            .total-price {
-                font-size: 2.3rem;
-            }
-
-            .upload-icon {
-                font-size: 3rem;
-            }
-
-            .quantity-input-wrapper {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .viewer-container {
-                height: 300px;
-            }
-        }
-
+        /* ─── ФОКУС ─── */
         *:focus-visible {
-            outline: 3px solid var(--blue-400);
+            outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
 
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
-            opacity: 1;
-            margin-right: 10px;
+            opacity: 0.5;
+            margin-right: 8px;
+            filter: invert(1);
         }
 
-        /* Loading indicator */
-        .loading-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: var(--gray-600);
-            font-weight: 500;
+
+        /* ─── ДВА БЛОКА ТИРАЖА РЯДОМ ─── */
+        .quantities-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .quantity-block { margin-bottom: 0 !important; }
+
+        /* ─── СКИДКА STANDALONE ─── */
+        div.discount-display { margin-bottom: 12px; }
+
+        /* ─── СВОДКА ЗАКАЗА ─── */
+        .order-summary {
+            margin-top: 22px;
+            border-top: 1px solid rgba(0, 212, 200, 0.2);
+            padding-top: 16px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.88rem;
+        }
+        .summary-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .summary-label { color: var(--text-secondary); font-weight: 500; }
+        .summary-value { color: var(--text-primary); font-weight: 600; text-align: right; }
+        .summary-row-accent {
+            margin-top: 4px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 212, 200, 0.2);
+            border-bottom: none;
+        }
+        .summary-row-accent .summary-label { color: var(--text-secondary); font-size: 0.9rem; }
+        .summary-row-accent .summary-value { color: var(--accent); font-size: 1.15rem; font-weight: 700; }
+
+
+        /* ─── СКИДКА ВНУТРИ СВОДКИ ─── */
+        #summaryDiscountBlock {
+            border-top: 1px dashed rgba(0, 212, 200, 0.25);
+            border-bottom: 1px dashed rgba(0, 212, 200, 0.25);
+            margin: 4px 0;
+            padding: 2px 0;
         }
 
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--gray-300);
-            border-top-color: var(--blue-500);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+        .summary-row-discount .summary-label {
+            color: var(--accent);
+            font-weight: 600;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .summary-discount-value {
+            color: var(--accent) !important;
+            font-weight: 700 !important;
+            font-size: 0.95rem;
+        }
+
+        .summary-strikethrough {
+            text-decoration: line-through;
+            color: var(--text-muted) !important;
+            font-weight: 400 !important;
+        }
+
+        .summary-saving {
+            color: #4cdb7a !important;
+            font-weight: 700 !important;
+        }
+
+        /* ─── АДАПТИВ ─── */
+        @media (max-width: 640px) {
+            body { padding: 12px 12px 40px; }
+
+            header { padding-bottom: 24px; }
+
+            .header-text h1 { font-size: 1.1rem; }
+
+            section { padding: 20px; }
+
+            .info-grid,
+            .params-grid,
+            .time-inputs-grid,
+            .radio-group,
+            .quantities-wrapper { grid-template-columns: 1fr; }
+
+            .total-price { font-size: 2.4rem; }
+
+            .quantity-input-wrapper { flex-direction: column; align-items: stretch; }
+
+            .viewer-container { height: 280px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🖨️ Калькулятор 3D-печати</h1>
-            <p class="subtitle">Расчёт стоимости 3D печати (fdm и фотополимер)</p>
+            <div class="header-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+            <div class="header-text">
+                <h1>3D <span>PRINT</span></h1>
+                <p class="subtitle">Cost Calculator</p>
+            </div>
         </header>
 
         <section class="upload-section">
-            <h3><span class="icon">📁</span> Загрузка 3D модели</h3>
+            <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span> Загрузка 3D модели</h3>
             <div class="upload-area" id="uploadArea">
-                <span class="upload-icon">📦</span>
+                <span class="upload-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="56" height="56"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
                 <p>Перетащите файл сюда или нажмите для выбора</p>
                 <p class="supported-formats">STL • OBJ • 3MF</p>
             </div>
@@ -720,22 +799,22 @@
         </section>
 
         <section class="viewer-section" id="viewerSection" style="display: none;">
-            <h3><span class="icon">👁️</span> Просмотр модели</h3>
+            <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span> Просмотр модели</h3>
             <div class="viewer-container">
                 <div id="canvas-container"></div>
                 <div class="viewer-controls">
-                    <span>🖱️ ЛКМ - вращение</span>
-                    <span>🔍 Колесо - зум</span>
-                    <span>👆 ПКМ - панорама</span>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9a7 7 0 1 0 14 0A7 7 0 0 0 5 9z"/><path d="M8 9h8M12 5v8"/></svg> ЛКМ — вращение</span>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg> Колесо — зум</span>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg> ПКМ — панорама</span>
                 </div>
             </div>
         </section>
 
         <section class="model-info-section" id="modelInfoSection" style="display: none;">
-            <h3><span class="icon">📊</span> Информация о модели</h3>
+            <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> Информация о модели</h3>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>📏 Размеры модели</h3>
+                    <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></span> Размеры модели</h3>
                     <div class="info-data">
                         <span>X: <b id="sizeX">0</b> мм</span>
                         <span>Y: <b id="sizeY">0</b> мм</span>
@@ -743,14 +822,14 @@
                     </div>
                 </div>
                 <div class="info-card">
-                    <h3>✅ Совместимость</h3>
+                    <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Совместимость</h3>
                     <div class="compatibility-status">
                         <div class="status-item" id="fdmStatus">
-                            <span class="status-icon">⭕</span>
+                            <span class="status-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>
                             <span>FDM (250×250×250 мм)</span>
                         </div>
                         <div class="status-item" id="resinStatus">
-                            <span class="status-icon">⭕</span>
+                            <span class="status-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>
                             <span>Фотополимер (215×121×218 мм)</span>
                         </div>
                     </div>
@@ -759,7 +838,7 @@
         </section>
 
         <section class="print-type-section">
-            <h3><span class="icon">🔧</span> Тип печати</h3>
+            <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span> Тип печати</h3>
             <div class="radio-group">
                 <label class="radio-label">
                     <input type="radio" name="printType" value="fdm" checked>
@@ -775,15 +854,15 @@
         </section>
 
         <section class="material-section">
-            <h3><span class="icon">🧪</span> Материал</h3>
+            <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span> Материал</h3>
             <select id="materialSelect" class="form-select"></select>
         </section>
 
         <section class="print-params-section">
-            <h3><span class="icon">⚙️</span> Параметры печати</h3>
+            <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span> Параметры печати</h3>
             <div class="params-grid">
                 <div class="form-group">
-                    <label>⏱️ Время печати</label>
+                    <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Время печати стола</label>
                     <div class="time-inputs-grid">
                         <div class="input-with-unit">
                             <input type="number" id="printHours" class="form-input" min="0" value="0">
@@ -796,7 +875,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="materialAmount" id="materialAmountLabel">📦 Расход материала<span id="materialOverheadHint" style="display:none; color: var(--gray-500); font-weight: 400; font-size: 0.88rem;"></span></label>
+                    <label for="materialAmount" id="materialAmountLabel"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M12 5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M6.5 8h11l1 13h-13z"/></svg> Расход материала на стол<span id="materialOverheadHint" style="display:none; color: var(--text-muted); font-weight: 400; font-size: 0.88rem;"></span></label>
                     <div class="input-with-unit">
                         <input type="number" id="materialAmount" class="form-input" min="0" value="0">
                         <span class="input-unit" id="materialUnit">грамм</span>
@@ -805,39 +884,70 @@
             </div>
         </section>
 
-        <section class="quantity-section">
-            <h3><span class="icon">📦</span> Тираж</h3>
-            <div class="quantity-input-wrapper">
-                <span class="quantity-icon">🔢</span>
-                <div class="input-with-unit" style="flex: 1;">
-                    <input type="number" id="quantity" class="form-input" min="1" value="1">
-                    <span class="input-unit">штук</span>
+        <div class="quantities-wrapper">
+            <section class="table-count-section quantity-block">
+                <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> Количество столов</h3>
+                <div class="input-with-unit">
+                    <input type="number" id="tableCount" class="form-input" min="1" value="1">
+                    <span class="input-unit">стол.</span>
                 </div>
-            </div>
-            <div class="discount-display" id="discountDisplay">
-                <span class="icon">🎉</span>
-                <span id="discountText">Скидка 0%</span>
-            </div>
-        </section>
-
+            </section>
+            <section class="items-per-table-section quantity-block">
+                <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span> Изделий на столе</h3>
+                <div class="input-with-unit">
+                    <input type="number" id="itemsPerTable" class="form-input" min="1" value="1">
+                    <span class="input-unit">шт.</span>
+                </div>
+            </section>
+        </div>
         <section class="total-section">
             <div class="total-card">
-                <h3>💰 Итоговая стоимость</h3>
+                <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> Итоговая стоимость заказа</h3>
                 <div class="total-placeholder" id="totalPlaceholder">Введите время и расход материала</div>
                 <div class="total-price" id="totalPrice" style="display: none;">0.00 ₽</div>
-                <div class="discount-note" id="discountNote">
-                    <div>Цена с учётом скидки <span class="percent" id="discountPercentNote">0</span>%</div>
-                    <div class="saved-info">
+                <div class="saved-info">
                         <span class="original" id="originalPrice">0.00 ₽</span>
                         <span class="amount" id="savedAmount">Экономия 0.00 ₽</span>
+                    </div>
+                </div>
+                <div class="order-summary" id="orderSummary" style="display:none;">
+                    <div class="summary-row">
+                        <span class="summary-label">Столов в расчёте</span>
+                        <span class="summary-value" id="summaryTables">1</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Изделий на 1 столе</span>
+                        <span class="summary-value" id="summaryItemsPerTable">1 шт.</span>
+                    </div>
+                    <div class="summary-row" id="summaryTotalItemsRow" style="display:none;">
+                        <span class="summary-label">Всего изделий</span>
+                        <span class="summary-value" id="summaryTotalItems">1 шт.</span>
+                    </div>
+                    <div id="summaryDiscountBlock" style="display:none;">
+                        <div class="summary-row summary-row-discount">
+                            <span class="summary-label" id="summaryDiscountLabel">Скидка за тираж</span>
+                            <span class="summary-value summary-discount-value" id="summaryDiscountPercent">−0%</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Цена без скидки</span>
+                            <span class="summary-value summary-strikethrough" id="summaryOriginalPrice">0.00 ₽</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Экономия</span>
+                            <span class="summary-value summary-saving" id="summarySaving">0.00 ₽</span>
+                        </div>
+                    </div>
+                    <div class="summary-row summary-row-accent">
+                        <span class="summary-label">Стоимость за 1 изделие</span>
+                        <span class="summary-value" id="summaryPricePerItem">0.00 ₽</span>
                     </div>
                 </div>
             </div>
             
             <div class="minimum-order-section" id="minimumOrderSection">
-                <h3><span class="icon">⚠️</span> Обратите внимание</h3>
+                <h3><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Обратите внимание</h3>
                 <div class="minimum-order-info">
-                    <span class="icon">📋</span>
+                    <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg></span>
                     <span class="text">Минимальная стоимость заказа:</span>
                     <span class="amount" id="minimumOrderAmount">0 ₽</span>
                 </div>
@@ -1057,7 +1167,8 @@
             document.getElementById('printHours').addEventListener('input', calculateTotal);
             document.getElementById('printMinutes').addEventListener('input', calculateTotal);
             document.getElementById('materialAmount').addEventListener('input', calculateTotal);
-            document.getElementById('quantity').addEventListener('input', calculateTotal);
+            document.getElementById('tableCount').addEventListener('input', calculateTotal);
+            document.getElementById('itemsPerTable').addEventListener('input', calculateTotal);
         }
 
         // === ЗАГРУЗКА МОДЕЛИ ===
@@ -1278,10 +1389,10 @@
             
             if (compatible) {
                 element.classList.add('compatible');
-                icon.textContent = '✅';
+                icon.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"20\" height=\"20\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/></svg>";
             } else {
                 element.classList.add('incompatible');
-                icon.textContent = '❌';
+                icon.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"20\" height=\"20\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/></svg>";
             }
         }
 
@@ -1340,78 +1451,97 @@
             if (!config) return;
 
             const printType = document.querySelector('input[name="printType"]:checked').value;
-            const material = document.getElementById('materialSelect').value;
-            
-            const hours = parseFloat(document.getElementById('printHours').value) || 0;
+            const material  = document.getElementById('materialSelect').value;
+
+            const hours   = parseFloat(document.getElementById('printHours').value)   || 0;
             const minutes = parseFloat(document.getElementById('printMinutes').value) || 0;
             const totalMinutes = (hours * 60) + minutes;
-            
+
             const materialAmount = parseFloat(document.getElementById('materialAmount').value) || 0;
-            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            const tableCount     = parseInt(document.getElementById('tableCount').value)     || 1;
+            const itemsPerTable  = parseInt(document.getElementById('itemsPerTable').value)  || 1;
 
-            const totalPriceEl = document.getElementById('totalPrice');
-            const totalPlaceholderEl = document.getElementById('totalPlaceholder');
-            const discountNote = document.getElementById('discountNote');
+            const totalPriceEl        = document.getElementById('totalPrice');
+            const totalPlaceholderEl  = document.getElementById('totalPlaceholder');
             const minimumOrderSection = document.getElementById('minimumOrderSection');
+            const orderSummary        = document.getElementById('orderSummary');
 
-            // ПРОВЕРКА: Показываем цену ТОЛЬКО если введены И время И расход материала
-            const hasTime = totalMinutes > 0;
+            // Показываем цену ТОЛЬКО если введены И время И расход материала
+            const hasTime     = totalMinutes > 0;
             const hasMaterial = materialAmount > 0;
 
             if (!hasTime || !hasMaterial) {
-                totalPriceEl.style.display = 'none';
+                totalPriceEl.style.display       = 'none';
                 totalPlaceholderEl.style.display = 'block';
-                discountNote.classList.remove('visible');
+                orderSummary.style.display       = 'none';
                 minimumOrderSection.classList.remove('visible');
                 return;
             }
 
-            totalPriceEl.style.display = 'block';
+            totalPriceEl.style.display       = 'block';
             totalPlaceholderEl.style.display = 'none';
+            orderSummary.style.display       = 'block';
 
-            const materialCost = calculateMaterialCost(printType, material, materialAmount);
-            const timeCost = calculateTimeCost(printType, totalMinutes);
-            const energyCost = calculateEnergyCost(printType, totalMinutes);
+            // Себестоимость одного стола
+            const materialCost     = calculateMaterialCost(printType, material, materialAmount);
+            const timeCost         = calculateTimeCost(printType, totalMinutes);
+            const energyCost       = calculateEnergyCost(printType, totalMinutes);
             const amortizationCost = calculateAmortizationCost(printType, totalMinutes);
-            const fixedCosts = calculateFixedCosts(printType, totalMinutes);
-            const consumablesCost = calculateConsumablesCost(printType, totalMinutes);
+            const fixedCosts       = calculateFixedCosts(printType, totalMinutes);
+            const consumablesCost  = calculateConsumablesCost(printType, totalMinutes);
 
-            const subtotal = materialCost + timeCost + energyCost + amortizationCost + fixedCosts + consumablesCost;
-            const markup = getMarkup(printType);
-            const pricePerItem = subtotal * (1 + markup / 100);
+            const subtotal      = materialCost + timeCost + energyCost + amortizationCost + fixedCosts + consumablesCost;
+            const markup        = getMarkup(printType);
+            const pricePerTable = subtotal * (1 + markup / 100);
 
-            const totalBeforeDiscount = pricePerItem * quantity;
+            // Общее количество изделий — основа для расчёта скидки
+            const totalItems = tableCount * itemsPerTable;
 
-            const discountPercent = getDiscountByQuantity(quantity);
-            const discountAmount = totalBeforeDiscount * (discountPercent / 100);
-            const totalAfterDiscount = totalBeforeDiscount - discountAmount;
+            // Итог по всем столам со скидкой от общего числа изделий
+            const totalBeforeDiscount = pricePerTable * tableCount;
+            const discountPercent     = getDiscountByQuantity(totalItems);
+            const discountAmount      = totalBeforeDiscount * (discountPercent / 100);
+            const totalAfterDiscount  = totalBeforeDiscount - discountAmount;
 
             totalPriceEl.textContent = totalAfterDiscount.toFixed(2) + ' ₽';
 
-            const minimumOrder = printType === 'fdm' 
-                ? config.minimumOrder.fdm 
+            // ── Сводка ──────────────────────────────────────────
+            const pricePerItem = totalAfterDiscount / totalItems;
+
+            document.getElementById('summaryTables').textContent        = tableCount + ' шт.';
+            document.getElementById('summaryItemsPerTable').textContent = itemsPerTable + ' шт.';
+            document.getElementById('summaryPricePerItem').textContent  = pricePerItem.toFixed(2) + ' ₽';
+
+            const totalItemsRow = document.getElementById('summaryTotalItemsRow');
+            if (tableCount > 1) {
+                totalItemsRow.style.display = 'flex';
+                document.getElementById('summaryTotalItems').textContent = totalItems + ' шт.';
+            } else {
+                totalItemsRow.style.display = 'none';
+            }
+
+            // ── Скидка в сводке ──────────────────────────────────
+            const discountBlock = document.getElementById('summaryDiscountBlock');
+            if (discountPercent > 0) {
+                discountBlock.style.display = 'block';
+                document.getElementById('summaryDiscountLabel').textContent   = `Скидка за тираж (${totalItems} шт.)`;
+                document.getElementById('summaryDiscountPercent').textContent = `−${discountPercent}%`;
+                document.getElementById('summaryOriginalPrice').textContent   = totalBeforeDiscount.toFixed(2) + ' ₽';
+                document.getElementById('summarySaving').textContent          = discountAmount.toFixed(2) + ' ₽';
+            } else {
+                discountBlock.style.display = 'none';
+            }
+
+            // ── Минимальный заказ ────────────────────────────────
+            const minimumOrder = printType === 'fdm'
+                ? config.minimumOrder.fdm
                 : config.minimumOrder.resin;
-            
+
             if (totalAfterDiscount < minimumOrder) {
                 minimumOrderSection.classList.add('visible');
                 document.getElementById('minimumOrderAmount').textContent = minimumOrder.toFixed(2) + ' ₽';
             } else {
                 minimumOrderSection.classList.remove('visible');
-            }
-
-            const discountDisplay = document.getElementById('discountDisplay');
-            
-            if (discountPercent > 0) {
-                discountDisplay.classList.add('visible');
-                document.getElementById('discountText').textContent = `Скидка ${discountPercent}% за тираж`;
-                
-                discountNote.classList.add('visible');
-                document.getElementById('discountPercentNote').textContent = discountPercent;
-                document.getElementById('originalPrice').textContent = totalBeforeDiscount.toFixed(2) + ' ₽';
-                document.getElementById('savedAmount').textContent = `Экономия ${discountAmount.toFixed(2)} ₽`;
-            } else {
-                discountDisplay.classList.remove('visible');
-                discountNote.classList.remove('visible');
             }
         }
 
